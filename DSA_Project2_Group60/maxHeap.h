@@ -22,9 +22,16 @@ struct Node {
     string year; //year of model
     string make; //car make
     string model; //car model
-    string range; //Eletric Range
+    string range; //Electric Range
     string id; //Vehicle ID
     string tract; // 2020 Census Tract
+
+    string EV; //Electric Vehicle Type
+    string CAFV; //Clean Alternative Fuel Vehicle (CAFV) Eligibility
+    string MSRP; // Base MSRP
+    string ld; //Legislative District
+    string location; //x and y location
+    string EU; //Electric Utility
 
     //Skipped data for State since all the same, Also skipped Vehicle EV type, CAFV, BASe MSRP,
     //Legislative District, location, and Eletric Utility
@@ -33,7 +40,7 @@ struct Node {
     Node* right;
 
     //constructor
-    Node(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract) {
+    Node(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU) {
         this->left = nullptr;
         this->right = nullptr;
 
@@ -47,6 +54,12 @@ struct Node {
         this->range=range;
         this->id=id;
         this->tract=tract;
+        this->EV= EV;
+        this->CAFV=CAFV;
+        this->MSRP=MSRP;
+        this->ld=ld;
+        this->location=location;
+        this->EU=EU;
     }
 };
 
@@ -63,7 +76,7 @@ class maxHeap {
     public:
         maxHeap(){ }
         void loadHeap(string csvFileName);
-        void insertNode(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract);
+        void insertNode(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU);
 
         void inOrderTraversal();
         void postOrderTraversal();

@@ -52,6 +52,7 @@ void maxHeap::preOrderTraversalHelper(Node *node) {
 
 //will swap all varbiles in each node
 void maxHeap::swapValues(Node *current, Node *parent) {
+
   //stores parents values in temp variables
   string vinTemp = parent->vin;
   string countyTemp = parent->county;
@@ -63,6 +64,12 @@ void maxHeap::swapValues(Node *current, Node *parent) {
   string rangeTemp = parent->range;
   string idTemp = parent->id;
   string tractTemp = parent->tract;
+  string EVtemp = parent->EV;
+  string CAFVtemp = parent->CAFV;
+  string MSRPtemp = parent->MSRP;
+  string ldTemp = parent->ld;
+  string locationTemp = parent->location;
+  string EUtemp = parent->EU;
 
   //sets parent values to current values
   parent->vin = current->vin;
@@ -75,6 +82,13 @@ void maxHeap::swapValues(Node *current, Node *parent) {
   parent->range = current->range;
   parent->id = current->id;
   parent->tract = current->tract;
+  parent->EV = current->EV;
+  parent->CAFV = current->CAFV;
+  parent->MSRP = current->MSRP;
+  parent->ld = current->ld;
+  parent->location = current->location;
+  parent->EU = current->EU;
+
 
   //sets current to temp values
   current->vin =vinTemp;
@@ -87,6 +101,13 @@ void maxHeap::swapValues(Node *current, Node *parent) {
   current->range= rangeTemp;
   current->id= idTemp;
   current->tract= tractTemp;
+  current->EV = EVtemp;
+  current->CAFV = CAFVtemp;
+  current->MSRP = MSRPtemp;
+  current->ld = ldTemp;
+  current->location = locationTemp;
+  current->EU = EUtemp;
+  
 }
 
 //will pritn every value of the node
@@ -167,6 +188,7 @@ void maxHeap::loadHeap(string csvFileName) {
       getline(file, read);
       string tract= read;
 
+
       /*
       cout<<"Vin: "<<vin<<endl;
       cout<<"County: "<<county<<endl;
@@ -185,7 +207,7 @@ void maxHeap::loadHeap(string csvFileName) {
       count++;
 
       //MAKE NODES AND UPDATE NODE COUNTER :) :D
-      insertNode(vin, county, city, postalCode, year, make, model, range, id, tract);
+      insertNode(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
 
     }
     file.close();
@@ -201,10 +223,10 @@ void maxHeap::loadHeap(string csvFileName) {
 
 //adds node kinda
 void maxHeap::insertNode(string vin, string county, string city, string postalCode, string year, string make,
-  string model, string range, string id, string tract) {
+  string model, string range, string id, string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU) {
   //make first node
   if (heapSize==0){
-    root = new Node(vin, county, city, postalCode, year, make, model, range, id, tract);
+    root = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
     heapSize++;
     return;
   }
@@ -242,10 +264,10 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
   }
           //adds last oen
   if (heapSize%2==0){
-    parent->right = new Node(vin, county, city, postalCode, year, make, model, range, id, tract);
+    parent->right = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
     parentsInPath.push_back(parent->right);
   }else{
-    parent->left = new Node(vin, county, city, postalCode, year, make, model, range, id, tract);
+    parent->left = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
     parentsInPath.push_back(parent->left);
   }
 
