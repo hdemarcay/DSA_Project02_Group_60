@@ -195,7 +195,7 @@ void maxHeap::loadHeap(string csvFileName) {
     std::cerr << "issue here"<<e.what() << std::endl;
     //std::cout<<"ISEEEUEEUEU************"<<std::endl;
   }
-  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap.\n"<<endl;
+  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap.\nIt took [***ADD TIME PLEASE HERE***] seconds\n"<<endl;
 
 }
 

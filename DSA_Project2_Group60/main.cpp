@@ -14,6 +14,8 @@ int main() {
     cout<<"Welcome to DSA Project 02\nDepth Versus Breath First Traversal\nCreators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi"<<endl;
     cout<<"Group 60\n"<<endl;
 
+    cout<<"ADD PURPOSE/REAL LIFE GOAL OF PROGRAM WHY HELP PEOPLE\n"<<endl;
+
 
     cout<<"The data used is Electric Vehicle Population Data in Washington\n\nWhen you are ready to load the data base press enter..."<<endl;
     string firstLine;
@@ -53,7 +55,7 @@ int main() {
             cout<<"- ADD EVERYTHING ELSE PLEASE"<<endl;
             cout<<"- to exit type: done, stop, end, 0, or -1"<<endl;
         }
-        if (command!="end"||command!="stop"||command!="done"||command!="-1"||command!="0"||command!=" ") {
+        if (command=="end"||command=="stop"||command=="done"||command=="-1"||command=="0"||command==" ") {
             continue;
         }
         if (command == "print inorder") {
