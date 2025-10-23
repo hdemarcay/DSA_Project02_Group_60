@@ -33,8 +33,7 @@ struct Node {
     string location; //x and y location
     string EU; //Electric Utility
 
-    //Skipped data for State since all the same, Also skipped Vehicle EV type, CAFV, BASe MSRP,
-    //Legislative District, location, and Eletric Utility
+    //Skipped data for State since all the same
 
     Node* left;
     Node* right;
@@ -61,6 +60,30 @@ struct Node {
         this->location=location;
         this->EU=EU;
     }
+
+    //overloaded == operator
+    bool operator==(const Node& other) const {
+        //once we decide which we want to use, we can just delete them from here so that it isn't considered when
+        //looking for exact matches (unless that's not how it works..)
+        bool vinB = this->vin == other.vin;
+        bool countyB = this->county == other.county;
+        bool cityB = this->city == other.city;
+        bool postalCodeB = this->postalCode == other.postalCode;
+        bool yearB = this->year == other.year;
+        bool makeB = this->make == other.make;
+        bool modelB = this->model == other.model;
+        bool rangeB = this->range == other.range;
+        bool idB = this->id == other.id;
+        bool tractB = this->tract == other.tract;
+        bool EVB = this->EV == other.EV;
+        bool CAFVB = this->CAFV == other.CAFV;
+        bool MSRPB = this->MSRP == other.MSRP;
+        bool ldB = this->ld == other.ld;
+        bool locationB = this->location == other.location;
+        bool EUB = this->EU == other.EU;
+
+        return vinB && countyB && cityB && postalCodeB && yearB && makeB && modelB && rangeB && idB && tractB && EVB && CAFVB && MSRPB && ldB && locationB && EUB;
+    }
 };
 
 class maxHeap {
@@ -73,6 +96,32 @@ class maxHeap {
     void swapValues(Node *current, Node *parent);
     void printNode(Node *node);
 
+    //search functions
+    //Q: how specific do we want to go?
+    //should I just make them for each characteristic of the noade and write a function that takes the intersection?
+    //because writing all the different combinations may suck
+    //**they will all return vectors :D
+
+    //ADD STD::CLOCK
+
+    vector<Node*> searchCountyHelper(Node* node, std::string county, vector<Node*>& matches);
+    vector<Node*> searchCityHelper(Node* node, std::string city, vector<Node*>& matches);
+    vector<Node*> searchYearHelper(Node* node, std::string year, vector<Node*>& matches);
+    vector<Node*> searchMakeHelper(Node* node, std::string make, vector<Node*>& matches);
+    vector<Node*> searchModelHelper(Node* node, std::string model, vector<Node*>& matches);
+
+    //sus search functions
+    //questionable if we keep them or not
+    vector<Node*> searchVinHelper(Node* node, std::string vin, vector<Node*>& matches);
+    vector<Node*> searchPostalCodeHelper(Node* node, std::string postalCode, vector<Node*>& matches);
+    vector<Node*> searchIDHelper(Node* node, std::string ID, vector<Node*>& matches);
+    vector<Node*> searchTractHelper(Node* node, std::string tract, vector<Node*>& matches);
+
+    //definitive 'not doing' (I think)
+    //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
+
+    vector<Node*> intersection(vector<Node*> one, vector<Node*> two);
+
     public:
         maxHeap(){ }
         void loadHeap(string csvFileName);
@@ -82,6 +131,17 @@ class maxHeap {
         void postOrderTraversal();
         void preOrderTraversal();
 
+
+    vector<Node*> searchCounty();
+    vector<Node*> searchCity();
+    vector<Node*> searchYear();
+    vector<Node*> searchMake();
+    vector<Node*> searchModel();
+
+    //maybe
+    vector<Node*> searchPostalCodeHelper();
+    vector<Node*> searchIDHelper();
+    vector<Node*> searchTractHelper();
 };
 
 

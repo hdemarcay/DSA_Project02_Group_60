@@ -11,8 +11,8 @@
 // - add group names and titles stuff
 // - add function to start reading from terminal like how many commands
 // - pick what a terminal commands are
-// - figure out clock time
-// - figure out new search functions
+// - figure out clock time (std::clock)
+// - figure out new search functions (kinda did)
 // - in-order traversals
 // - idea maybe a find 12th node kinda thing????
 // - add other stuff we need to do
@@ -50,7 +50,7 @@ void maxHeap::preOrderTraversalHelper(Node *node) {
   }
 }
 
-//will swap all varbiles in each node
+//will swap all variables in each node
 void maxHeap::swapValues(Node *current, Node *parent) {
 
   //stores parents values in temp variables
@@ -208,7 +208,6 @@ void maxHeap::loadHeap(string csvFileName) {
 
       //MAKE NODES AND UPDATE NODE COUNTER :) :D
       insertNode(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
-
     }
     file.close();
   }
@@ -291,3 +290,117 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
 }
 
 
+vector<Node*> searchCountyHelper(Node* node, std::string county, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (node->county == county) {
+      matches.push_back(node);
+   }
+   searchCountyHelper(node->left, county, matches);
+   searchCountyHelper(node->right, county, matches);
+}
+
+vector<Node*> searchCityHelper(Node* node, std::string city, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (node->city == city) {
+      matches.push_back(node);
+   }
+   searchCityHelper(node->left, city, matches);
+   searchCityHelper(node->right, city, matches);
+}
+
+vector<Node*> searchYearHelper(Node* node, std::string year, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (node->year == year) {
+      matches.push_back(node);
+   }
+   searchYearHelper(node->left, year, matches);
+   searchYearHelper(node->right, year, matches);
+}
+
+vector<Node*> searchMakeHelper(Node* node, std::string make, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->make == make) {
+      matches.push_back(node);
+   }
+   searchMakeHelper(node->left, make, matches);
+   searchMakeHelper(node->right, make, matches);
+}
+
+vector<Node*> searchModelHelper(Node* node, std::string model, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->model == model) {
+      matches.push_back(node);
+   }
+   searchModelHelper(node->left, model, matches);
+   searchModelHelper(node->right, model, matches);
+}
+
+
+
+
+vector<Node*> searchVinHelper(Node* node, std::string vin, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->vin == vin) {
+      matches.push_back(node);
+   }
+   searchVinHelper(node->left, vin, matches);
+   searchVinHelper(node->right, vin, matches);
+}
+
+vector<Node*> searchPostalCodeHelper(Node* node, std::string postalCode, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->postalCode == postalCode) {
+      matches.push_back(node);
+   }
+   searchPostalCodeHelper(node->left, postalCode, matches);
+   searchPostalCodeHelper(node->right, postalCode, matches);
+}
+
+vector<Node*> searchIDHelper(Node* node, std::string ID, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->id == ID) {
+      matches.push_back(node);
+   }
+   searchIDHelper(node->left, ID, matches);
+   searchIDHelper(node->right, ID, matches);
+}
+
+vector<Node*> searchTractHelper(Node* node, std::string tract, vector<Node*>& matches) {
+   if (!node) {
+      return;
+   }
+   if (root->tract == tract) {
+      matches.push_back(node);
+   }
+   searchTractHelper(node->left, tract, matches);
+   searchTractHelper(node->right, tract, matches);
+}
+
+vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two) {
+    vector<Node*> result;
+    for (int i = 0; i < one.size(); i++) {
+        for (int j = 0; j < two.size(); j++) {
+            if (one[i] == two[j]) {
+                result.push_back(one[i]);
+                break;
+            }
+        }
+    }
+    return result;
+}
