@@ -26,7 +26,11 @@ int main() {
 
     maxHeap heap;
     //ADD TIME!!!!!!!!!!!!!!!!!!*******************************************************************************
+    chrono::steady_clock::time_point beforeLoad = chrono::steady_clock::now();
     heap.loadHeap("Electric_Vehicle_Population_Data_attempting.csv");
+    chrono::steady_clock::time_point afterLoad = chrono::steady_clock::now();
+    chrono::duration<double> loadTime = chrono::duration_cast<chrono::duration<double>>(afterLoad - beforeLoad);
+    cout<<"It took "<<loadTime.count()<<" seconds\n"<<endl;
 
     //timer.restart();
     //timer.getElapsedTime();
@@ -76,6 +80,9 @@ int main() {
         } else if (command == "ADD OTHER COMMANDS") {
             //TO DO:
             cout<<"ADD OTHER COMMANDS"<<endl;
+            //like search
+            // how many
+            // how many categories? what category
         }
         else {
             cout <<"not a valid command"<<endl;

@@ -310,7 +310,7 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
 }
 
 //searches for nodes with matching county
-void searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
+void maxHeap::searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -322,7 +322,7 @@ void searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching city
-void searchCityHelper(Node* node, string city, vector<Node*>& matches) {
+void maxHeap::searchCityHelper(Node* node, string city, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -334,7 +334,7 @@ void searchCityHelper(Node* node, string city, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching year
-void searchYearHelper(Node* node, string year, vector<Node*>& matches) {
+void maxHeap::searchYearHelper(Node* node, string year, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -346,11 +346,11 @@ void searchYearHelper(Node* node, string year, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching make
-void searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
+void maxHeap::searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->make == make) {
+   if (node->make == make) {
       matches.push_back(node);
    }
    searchMakeHelper(node->left, make, matches);
@@ -358,11 +358,11 @@ void searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching model
-void searchModelHelper(Node* node, string model, vector<Node*>& matches) {
+void maxHeap::searchModelHelper(Node* node, string model, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->model == model) {
+   if (node->model == model) {
       matches.push_back(node);
    }
    searchModelHelper(node->left, model, matches);
@@ -372,11 +372,11 @@ void searchModelHelper(Node* node, string model, vector<Node*>& matches) {
 
 
 //searches for nodes with matching vin number
-void searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
+void maxHeap::searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->vin == vin) {
+   if (node->vin == vin) {
       matches.push_back(node);
    }
    searchVinHelper(node->left, vin, matches);
@@ -384,11 +384,11 @@ void searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching postal code
-void searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
+void maxHeap::searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->postalCode == postalCode) {
+   if (node->postalCode == postalCode) {
       matches.push_back(node);
    }
    searchPostalCodeHelper(node->left, postalCode, matches);
@@ -396,11 +396,11 @@ void searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matche
 }
 
 //searches for nodes with matching id
-void searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
+void maxHeap::searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->id == ID) {
+   if (node->id == ID) {
       matches.push_back(node);
    }
    searchIDHelper(node->left, ID, matches);
@@ -408,11 +408,11 @@ void searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching census tract number
-void searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
+void maxHeap::searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
    if (!node) {
       return;
    }
-   if (root->tract == tract) {
+   if (node->tract == tract) {
       matches.push_back(node);
    }
    searchTractHelper(node->left, tract, matches);
@@ -421,7 +421,7 @@ void searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
 
 //will be used when filtering by 2 or more conditions
 //it will take the vectors from the search functions and take the intersection of them
-vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two) {
+vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
     vector<Node*> result;
     for (int i = 0; i < one.size(); i++) {
         for (int j = 0; j < two.size(); j++) {
@@ -435,40 +435,40 @@ vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two) {
 }
 
 //search function the user "works" with
-vector<Node*> searchCounty(string county) {
+vector<Node*> maxHeap::searchCounty(string county) {
     vector<Node*> result;
-    searchCountyHelper(this->node, county, result);
+    searchCountyHelper(root, county, result);
     return result;
 }
 
-vector<Node*> searchCity(string city) {
+vector<Node*> maxHeap::searchCity(string city) {
     vector<Node*> result;
-    searchCityHelper(this->node, county, result);
+    searchCityHelper(root, city, result);
     return result;
 }
 
-vector<Node*> searchYear(string year) {
+vector<Node*> maxHeap::searchYear(string year) {
 
 }
 
-vector<Node*> searchMake(string make) {
+vector<Node*> maxHeap::searchMake(string make) {
 
 }
 
-vector<Node*> searchModel(string model) {
+vector<Node*> maxHeap::searchModel(string model) {
 
 }
 
 
 //maybe include, not sure yet
-vector<Node*> searchPostalCodeHelper(string postalCode) {
+vector<Node*> maxHeap::searchPostalCodeHelper(string postalCode) {
 
 }
 
-vector<Node*> searchIDHelper(string id) {
+vector<Node*> maxHeap::searchIDHelper(string id) {
 
 }
 
-vector<Node*> searchTractHelper(string tract) {
+vector<Node*> maxHeap::searchTractHelper(string tract) {
 
 }

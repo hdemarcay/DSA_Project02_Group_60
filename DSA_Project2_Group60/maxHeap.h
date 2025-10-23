@@ -122,7 +122,7 @@ class maxHeap {
     //definitive 'not doing' (I think)
     //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
 
-    vector<Node*> intersection(vector<Node*> one, vector<Node*> two);
+    vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
 
     public:
         maxHeap(){ }
