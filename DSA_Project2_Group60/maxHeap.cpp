@@ -13,8 +13,6 @@
 // - menu screen
 // - figure out functions
 // - make sure not case sensitive for commands
-//  - UPDATE CODE TO KAYLA AND KEEP MINE [so clock stuff and print stuff added to all files]
-// - make some commands i think
 
 
 
@@ -500,29 +498,41 @@ vector<Node*> maxHeap::searchCity(string city) {
 }
 
 vector<Node*> maxHeap::searchYear(string year) {
-
+    vector<Node*> result;
+    searchCityHelper(root, year, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchMake(string make) {
-
+    vector<Node*> result;
+    searchCityHelper(root, make, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchModel(string model) {
-
+    vector<Node*> result;
+    searchCityHelper(root, model, result);
+    return result;
 }
 
 
 //maybe include, not sure yet
 vector<Node*> maxHeap::searchPostalCodeHelper(string postalCode) {
-
+    vector<Node*> result;
+    searchCityHelper(root, postalCode, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchIDHelper(string id) {
-
+    vector<Node*> result;
+    searchCityHelper(root, id, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchTractHelper(string tract) {
-
+    vector<Node*> result;
+    searchCityHelper(root, tract, result);
+    return result;
 }
 
 

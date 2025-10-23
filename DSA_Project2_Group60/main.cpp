@@ -106,7 +106,6 @@ int main() {
             //TO DO:
             cout<<"ADD OTHER COMMANDS"<<endl;
             //like search
-            // how many
             // how many categories? what category
         }
         else {
