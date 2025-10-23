@@ -23,30 +23,30 @@
 
 
 //In-Order Traversal
-void maxHeap::inOrderTraversalHelper(Node* node) {
+void maxHeap::inOrderTraversalHelper(Node* node, bool print) {
   if (node != nullptr) {
-    inOrderTraversalHelper(node -> left);
-    printNode(node);
-    inOrderTraversalHelper(node -> right);
+    inOrderTraversalHelper(node -> left,print);
+    if (print){printNode(node);}
+    inOrderTraversalHelper(node -> right,print);
   }
 }
 
 //Post-Order Traversal and prints all the data
-void maxHeap::postOrderTraversalHelper(Node* node) {
+void maxHeap::postOrderTraversalHelper(Node* node, bool print) {
   if (node != nullptr) {
-    postOrderTraversalHelper(node->left);
-    postOrderTraversalHelper(node->right);
-    printNode(node);
+    postOrderTraversalHelper(node->left,print);
+    postOrderTraversalHelper(node->right,print);
+    if (print){ printNode(node);}
     cout << endl;
   }
 }
 
 //Pre-Order Traversal
-void maxHeap::preOrderTraversalHelper(Node* node) {
+void maxHeap::preOrderTraversalHelper(Node* node,bool print) {
   if (node != nullptr) {
-    printNode(node);
-    preOrderTraversalHelper(node->left);
-    preOrderTraversalHelper(node->right);
+      if (print){ printNode(node);}
+    preOrderTraversalHelper(node->left,print);
+    preOrderTraversalHelper(node->right,print);
   }
 }
 
@@ -127,21 +127,41 @@ void maxHeap::printNode(Node *node) {
 
 //calls helper function to use root
 void maxHeap::postOrderTraversal() {
-  cout << "Post Order Traversal of all elements (printing each element!)" << endl;
-  postOrderTraversalHelper(root);
+  cout << "Post Order Traversal of all elements (no printing)" << endl;
+  postOrderTraversalHelper(root,false);
 }
 
 //calls helper function to use root
 void maxHeap::preOrderTraversal() {
-  cout << "Pre Order Traversal of all elements (printing each element!)" << endl;
-  preOrderTraversalHelper(root);
+  cout << "Pre Order Traversal of all elements (no printing)" << endl;
+  preOrderTraversalHelper(root,false);
 }
 
 //calls helper function to use root
 void maxHeap::inOrderTraversal() {
-  cout << "In Order Traversal of all elements (printing each element!)" << endl;
-  inOrderTraversalHelper(root);
+  cout << "In Order Traversal of all elements (no printing)" << endl;
+  inOrderTraversalHelper(root,false);
 }
+
+//calls helper function to use root
+void maxHeap::printPostOrderTraversal() {
+    cout << "Post Order Traversal of all elements (printing each element!)" << endl;
+    postOrderTraversalHelper(root,true);
+}
+
+//calls helper function to use root
+void maxHeap::printPreOrderTraversal() {
+    cout << "Pre Order Traversal of all elements (printing each element!)" << endl;
+    preOrderTraversalHelper(root,true);
+}
+
+//calls helper function to use root
+void maxHeap::printInOrderTraversal() {
+    cout << "In Order Traversal of all elements (printing each element!)" << endl;
+    inOrderTraversalHelper(root,true);
+}
+
+
 
 //Loads the Heap values into the max heap from the file
 void maxHeap::loadHeap(string csvFileName) {

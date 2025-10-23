@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <chrono>
 #include "maxHeap.h"
 
 //PLEASE CHECK TITLES
@@ -59,22 +60,22 @@ int main() {
             continue;
         }
         if (command == "print inorder") {
-            heap.inOrderTraversal();
+            heap.printInOrderTraversal();
         }
         else if (command == "print preorder") {
-            heap.preOrderTraversal();
+            heap.printPreOrderTraversal();
         }
         else if (command == "print postorder") {
-            heap.postOrderTraversal();
+            heap.printPostOrderTraversal();
         } else if (command == "traverse inorder") {
-            //TO DO
-            cout<<"make this function!!!"<<endl;
+            heap.inOrderTraversal();
         }else if (command == "traverse preorder") {
-            // TO DO
-            cout<<"MAKE THIS FUNCTION"<<endl;
+            heap.postOrderTraversal();
         } else if (command == "traverse postorder") {
-            //TO DO
-            cout<<"MAKE THIS FUNCTION"<<endl;
+            heap.preOrderTraversal();
+        } else if (command == "ADD OTHER COMMANDS") {
+            //TO DO:
+            cout<<"ADD OTHER COMMANDS"<<endl;
         }
         else {
             cout <<"not a valid command"<<endl;

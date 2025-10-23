@@ -90,9 +90,9 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
-    void inOrderTraversalHelper(Node* node);
-    void postOrderTraversalHelper(Node* node);
-    void preOrderTraversalHelper(Node* node);
+    void inOrderTraversalHelper(Node* node,bool print);
+    void postOrderTraversalHelper(Node* node, bool print);
+    void preOrderTraversalHelper(Node* node,bool print);
     void swapValues(Node* current, Node* parent);
     void printNode(Node* node);
 
@@ -127,9 +127,12 @@ class maxHeap {
         void loadHeap(string csvFileName);
         void insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU);
 
-        void inOrderTraversal();
-        void postOrderTraversal();
-        void preOrderTraversal();
+        void printInOrderTraversal();
+        void printPostOrderTraversal();
+        void printPreOrderTraversal();
+		void inOrderTraversal();
+		void postOrderTraversal();
+		void preOrderTraversal();
 
     	//search functions that the user will "interact" with
     	vector<Node*> searchCounty();
