@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include "maxHeap.h"
@@ -14,7 +15,10 @@ int main() {
     cout << "Welcome to DSA Project 02\nDepth Versus Breath First Traversal\nCreators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi" << endl;
     cout << "Group 60\n" << endl;
 
-    cout << "ADD PURPOSE/REAL LIFE GOAL OF PROGRAM WHY HELP PEOPLE\n" << endl;
+    //thoughts? also, DO NOT REMOVE THE EXTRA SPACES AFTER 'TO', I added it to make it prettier when it prints :D
+    cout << "Our car lookup helps users find their dream car as quickly and efficiently as possible. In today's world, speed matters,"
+            "and we make finding the right car seamless. This benefits both consumers and businesses by matching the right cars to   "
+            "the right buyers and reducing returns due to dissatisfaction." << endl;
 
 
     cout << "The data used is Electric Vehicle Population Data in Washington\n\nWhen you are ready to load the data base press enter..." << endl;
@@ -29,7 +33,7 @@ int main() {
     heap.loadHeap("Electric_Vehicle_Population_Data_attempting.csv");
     chrono::steady_clock::time_point afterLoad = chrono::steady_clock::now();
     chrono::duration<double> loadTime = chrono::duration_cast<chrono::duration<double>>(afterLoad - beforeLoad);
-    cout<<"It took "<<setprecision(3)<<loadTime.count()<<" seconds to load the data\n"<<endl;
+    cout << "It took "<< std::setprecision(3) << loadTime.count() << " seconds to load the data\n" << endl;
 
     //timer.restart();
     //timer.getElapsedTime();
@@ -68,48 +72,48 @@ int main() {
             heap.printInOrderTraversal();
             //find the tota; time
             heap.findTime(start);
-            cout<<" print inorder\n"<<endl;
+            cout << " print inorder\n" << endl;
         }
         else if (command == "print preorder") {
             chrono::steady_clock::time_point start = chrono::steady_clock::now();
             heap.printPreOrderTraversal();
             heap.findTime(start);
-            cout<<" print preorder\n"<<endl;
+            cout << " print preorder\n" << endl;
         }
         else if (command == "print postorder") {
             chrono::steady_clock::time_point start = chrono::steady_clock::now();
             heap.printPostOrderTraversal();
             heap.findTime(start);
-            cout<<" print postorder\n"<<endl;
+            cout << " print postorder\n" << endl;
 
         } else if (command == "traverse inorder") {
-            cout<<"this might take a few seconds :)"<<endl;
+            cout << "this might take a few seconds :)" << endl;
             chrono::steady_clock::time_point start = chrono::steady_clock::now();
             heap.inOrderTraversal();
             heap.findTime(start);
-            cout<<" traverse inorder\n"<<endl;
+            cout << " traverse inorder\n" << endl;
 
         }else if (command == "traverse preorder") {
-            cout<<"this might take a few seconds :)"<<endl;
+            cout << "this might take a few seconds :)" << endl;
             chrono::steady_clock::time_point start = chrono::steady_clock::now();
             heap.postOrderTraversal();
             heap.findTime(start);
-            cout<<" traverse preorder\n"<<endl;
+            cout << " traverse preorder\n" << endl;
 
         } else if (command == "traverse postorder") {
             cout<<"this might take a few seconds :)"<<endl;
             chrono::steady_clock::time_point start = chrono::steady_clock::now();
             heap.preOrderTraversal();
             heap.findTime(start);
-            cout<<" traverse postorder\n"<<endl;
+            cout << " traverse postorder\n" << endl;
         } else if (command == "ADD OTHER COMMANDS") {
             //TO DO:
-            cout<<"ADD OTHER COMMANDS"<<endl;
+            cout << "ADD OTHER COMMANDS" << endl;
             //like search
             // how many categories? what category
         }
         else {
-            cout <<"not a valid command"<<endl;
+            cout << "not a valid command" << endl;
         }
     }
     return 0;

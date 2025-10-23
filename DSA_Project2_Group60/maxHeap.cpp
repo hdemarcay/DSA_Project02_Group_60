@@ -5,6 +5,8 @@
 
 #include "maxHeap.h"
 
+#include <iomanip>
+
 //TODO:
 // - add comments better
 // - add function to start reading from terminal like how many commands
@@ -360,113 +362,113 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
 }
 
 //searches for nodes with matching county
-void maxHeap::searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
+void maxHeap::searchCountyHelperDFS(Node* node, string county, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->county == county) {
       matches.push_back(node);
    }
-   searchCountyHelper(node->left, county, matches);
-   searchCountyHelper(node->right, county, matches);
+   searchCountyHelperDFS(node->left, county, matches);
+   searchCountyHelperDFS(node->right, county, matches);
 }
 
 //searches for nodes with matching city
-void maxHeap::searchCityHelper(Node* node, string city, vector<Node*>& matches) {
+void maxHeap::searchCityHelperDFS(Node* node, string city, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->city == city) {
       matches.push_back(node);
    }
-   searchCityHelper(node->left, city, matches);
-   searchCityHelper(node->right, city, matches);
+   searchCityHelperDFS(node->left, city, matches);
+   searchCityHelperDFS(node->right, city, matches);
 }
 
 //searches for nodes with matching year
-void maxHeap::searchYearHelper(Node* node, string year, vector<Node*>& matches) {
+void maxHeap::searchYearHelperDFS(Node* node, string year, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->year == year) {
       matches.push_back(node);
    }
-   searchYearHelper(node->left, year, matches);
-   searchYearHelper(node->right, year, matches);
+   searchYearHelperDFS(node->left, year, matches);
+   searchYearHelperDFS(node->right, year, matches);
 }
 
 //searches for nodes with matching make
-void maxHeap::searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
+void maxHeap::searchMakeHelperDFS(Node* node, string make, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->make == make) {
       matches.push_back(node);
    }
-   searchMakeHelper(node->left, make, matches);
-   searchMakeHelper(node->right, make, matches);
+   searchMakeHelperDFS(node->left, make, matches);
+   searchMakeHelperDFS(node->right, make, matches);
 }
 
 //searches for nodes with matching model
-void maxHeap::searchModelHelper(Node* node, string model, vector<Node*>& matches) {
+void maxHeap::searchModelHelperDFS(Node* node, string model, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->model == model) {
       matches.push_back(node);
    }
-   searchModelHelper(node->left, model, matches);
-   searchModelHelper(node->right, model, matches);
+   searchModelHelperDFS(node->left, model, matches);
+   searchModelHelperDFS(node->right, model, matches);
 }
 
 
 
 //searches for nodes with matching vin number
-void maxHeap::searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
+void maxHeap::searchVinHelperDFS(Node* node, string vin, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->vin == vin) {
       matches.push_back(node);
    }
-   searchVinHelper(node->left, vin, matches);
-   searchVinHelper(node->right, vin, matches);
+   searchVinHelperDFS(node->left, vin, matches);
+   searchVinHelperDFS(node->right, vin, matches);
 }
 
 //searches for nodes with matching postal code
-void maxHeap::searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
+void maxHeap::searchPostalCodeHelperDFS(Node* node, string postalCode, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->postalCode == postalCode) {
       matches.push_back(node);
    }
-   searchPostalCodeHelper(node->left, postalCode, matches);
-   searchPostalCodeHelper(node->right, postalCode, matches);
+   searchPostalCodeHelperDFS(node->left, postalCode, matches);
+   searchPostalCodeHelperDFS(node->right, postalCode, matches);
 }
 
 //searches for nodes with matching id
-void maxHeap::searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
+void maxHeap::searchIDHelperDFS(Node* node, string ID, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->id == ID) {
       matches.push_back(node);
    }
-   searchIDHelper(node->left, ID, matches);
-   searchIDHelper(node->right, ID, matches);
+   searchIDHelperDFS(node->left, ID, matches);
+   searchIDHelperDFS(node->right, ID, matches);
 }
 
 //searches for nodes with matching census tract number
-void maxHeap::searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
+void maxHeap::searchTractHelperDFS(Node* node, string tract, vector<Node*>& matches) {
    if (!node) {
       return;
    }
    if (node->tract == tract) {
       matches.push_back(node);
    }
-   searchTractHelper(node->left, tract, matches);
-   searchTractHelper(node->right, tract, matches);
+   searchTractHelperDFS(node->left, tract, matches);
+   searchTractHelperDFS(node->right, tract, matches);
 }
 
 //will be used when filtering by 2 or more conditions
@@ -485,53 +487,53 @@ vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
 }
 
 //search function the user "works" with
-vector<Node*> maxHeap::searchCounty(string county) {
+vector<Node*> maxHeap::searchCountyDFS(string county) {
     vector<Node*> result;
-    searchCountyHelper(root, county, result);
+    searchCountyHelperDFS(root, county, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchCity(string city) {
+vector<Node*> maxHeap::searchCityDFS(string city) {
     vector<Node*> result;
-    searchCityHelper(root, city, result);
+    searchCityHelperDFS(root, city, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchYear(string year) {
+vector<Node*> maxHeap::searchYearDFS(string year) {
     vector<Node*> result;
-    searchCityHelper(root, year, result);
+    searchCityHelperDFS(root, year, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchMake(string make) {
+vector<Node*> maxHeap::searchMakeDFS(string make) {
     vector<Node*> result;
-    searchCityHelper(root, make, result);
+    searchCityHelperDFS(root, make, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchModel(string model) {
+vector<Node*> maxHeap::searchModelDFS(string model) {
     vector<Node*> result;
-    searchCityHelper(root, model, result);
+    searchCityHelperDFS(root, model, result);
     return result;
 }
 
 
 //maybe include, not sure yet
-vector<Node*> maxHeap::searchPostalCodeHelper(string postalCode) {
+vector<Node*> maxHeap::searchPostalCodeDFS(string postalCode) {
     vector<Node*> result;
-    searchCityHelper(root, postalCode, result);
+    searchCityHelperDFS(root, postalCode, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchIDHelper(string id) {
+vector<Node*> maxHeap::searchIDDFS(string id) {
     vector<Node*> result;
-    searchCityHelper(root, id, result);
+    searchCityHelperDFS(root, id, result);
     return result;
 }
 
-vector<Node*> maxHeap::searchTractHelper(string tract) {
+vector<Node*> maxHeap::searchTractDFS(string tract) {
     vector<Node*> result;
-    searchCityHelper(root, tract, result);
+    searchCityHelperDFS(root, tract, result);
     return result;
 }
 
@@ -542,5 +544,5 @@ vector<Node*> maxHeap::searchTractHelper(string tract) {
 void maxHeap::findTime(chrono::steady_clock::time_point before) {
     chrono::steady_clock::time_point after = chrono::steady_clock::now();
     chrono::duration<double> funcTime = chrono::duration_cast<chrono::duration<double>>(after - before);
-    cout<<"It took "<<setprecision(3)<<funcTime.count()<<" seconds to ";
+    cout << "It took " << std::setprecision(3) << funcTime.count() << " seconds to ";
 }

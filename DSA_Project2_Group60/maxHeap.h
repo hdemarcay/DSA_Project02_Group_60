@@ -109,18 +109,18 @@ class maxHeap {
 
     //ADD STD::CLOCK
 
-    void searchCountyHelper(Node* node, string county, vector<Node*>& matches);
-    void searchCityHelper(Node* node, string city, vector<Node*>& matches);
-    void searchYearHelper(Node* node, string year, vector<Node*>& matches);
-    void searchMakeHelper(Node* node, string make, vector<Node*>& matches);
-    void searchModelHelper(Node* node, string model, vector<Node*>& matches);
+    void searchCountyHelperDFS(Node* node, string county, vector<Node*>& matches);
+    void searchCityHelperDFS(Node* node, string city, vector<Node*>& matches);
+    void searchYearHelperDFS(Node* node, string year, vector<Node*>& matches);
+    void searchMakeHelperDFS(Node* node, string make, vector<Node*>& matches);
+    void searchModelHelperDFS(Node* node, string model, vector<Node*>& matches);
 
     //sus search functions
     //questionable if we keep them or not
-    void searchVinHelper(Node* node, string vin, vector<Node*>& matches);
-    void searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches);
-    void searchIDHelper(Node* node, string ID, vector<Node*>& matches);
-    void searchTractHelper(Node* node, string tract, vector<Node*>& matches);
+    void searchVinHelperDFS(Node* node, string vin, vector<Node*>& matches);
+    void searchPostalCodeHelperDFS(Node* node, string postalCode, vector<Node*>& matches);
+    void searchIDHelperDFS(Node* node, string ID, vector<Node*>& matches);
+    void searchTractHelperDFS(Node* node, string tract, vector<Node*>& matches);
 
     //definitive 'not doing' (I think)
     //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
@@ -140,16 +140,18 @@ class maxHeap {
 		void preOrderTraversal();
 
     	//search functions that the user will "interact" with
-    	vector<Node*> searchCounty(string county);
-    	vector<Node*> searchCity(string city);
-    	vector<Node*> searchYear(string year);
-    	vector<Node*> searchMake(string make);
-    	vector<Node*> searchModel(string model);
+    	vector<Node*> searchCountyDFS(string county);
+    	vector<Node*> searchCityDFS(string city);
+    	vector<Node*> searchYearDFS(string year);
+    	vector<Node*> searchMakeDFS(string make);
+    	vector<Node*> searchModelDFS(string model);
 
     	//maybe include, not sure yet
-    	vector<Node*> searchPostalCodeHelper(string postalCode);
-    	vector<Node*> searchIDHelper(string id);
-    	vector<Node*> searchTractHelper(string tract);
+    	vector<Node*> searchPostalCodeDFS(string postalCode);
+    	vector<Node*> searchIDDFS(string id);
+    	vector<Node*> searchTractDFS(string tract);
+
+		//ADD THE BFS VERSION OF THE SEARCHES
 
 	//ADD THIS
 	void findTime(chrono::steady_clock::time_point before);
