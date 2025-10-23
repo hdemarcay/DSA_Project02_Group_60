@@ -11,6 +11,9 @@
 #include <stack>
 #include <vector>
 #include <string>
+#include <chrono>
+#include <fstream>
+
 using namespace std;
 
 struct Node {
@@ -97,6 +100,7 @@ class maxHeap {
 
     void swapValues(Node* current, Node* parent);
     void printNode(Node* node);
+	void printNode(Node* node,int Num);
 
     //search functions
     //Q: how specific do we want to go?
@@ -147,6 +151,9 @@ class maxHeap {
     	vector<Node*> searchPostalCodeHelper(string postalCode);
     	vector<Node*> searchIDHelper(string id);
     	vector<Node*> searchTractHelper(string tract);
+
+	//ADD THIS
+	void findTime(chrono::steady_clock::time_point before);
 };
 
 #endif //MAXHEAP_H

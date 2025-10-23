@@ -4,21 +4,17 @@
 //git: https://github.com/hdemarcay/DSA_Project02_Group_60.git
 
 #include "maxHeap.h"
-#include <fstream>
 
 //TODO:
 // - add comments better
-// - add group names and titles stuff
 // - add function to start reading from terminal like how many commands
 // - pick what a terminal commands are
-// - figure out clock time (std::clock)
-// - figure out new search functions (kinda did)
-// - in-order traversals
-// - idea maybe a find 12th node kinda thing????
-// - add other stuff we need to do
+// - ******order level traversals
 // - menu screen
 // - figure out functions
 // - make sure not case sensitive for commands
+//  - UPDATE CODE TO KAYLA AND KEEP MINE [so clock stuff and print stuff added to all files]
+// - make some commands i think
 
 
 
@@ -27,6 +23,8 @@ void maxHeap::inOrderTraversalHelper(Node* node, bool print) {
   if (node != nullptr) {
     inOrderTraversalHelper(node -> left,print);
     if (print){printNode(node);}
+      //will print only the vin
+    //if (print){printNode(node,1000000000);}
     inOrderTraversalHelper(node -> right,print);
   }
 }
@@ -37,7 +35,6 @@ void maxHeap::postOrderTraversalHelper(Node* node, bool print) {
     postOrderTraversalHelper(node->left,print);
     postOrderTraversalHelper(node->right,print);
     if (print){ printNode(node);}
-    cout << endl;
   }
 }
 
@@ -112,7 +109,7 @@ void maxHeap::swapValues(Node* current, Node* parent) {
 
 //will print every value of the node
 void maxHeap::printNode(Node *node) {
-  cout << "Vin: " << node->vin;
+  cout << "\nVin: " << node->vin;
   cout << "\tCounty: " << node->county;
   cout << "\t\tCity: " << node->city;
   cout << "\t\tPostal Code: " << node->postalCode;
@@ -122,6 +119,61 @@ void maxHeap::printNode(Node *node) {
   cout << "\tRange: " << node->range;
   cout << "\tID: " << node->id;
   cout << "\tTract: " << node->tract;
+
+}
+
+//will print only the charatistics u want based on input number
+void maxHeap::printNode(Node* node, int num) {
+    cout<<endl;
+    //will have number in the 10th spot if u want vin
+    if (num/1000000000!=0) {
+        cout << "Vin: " << node->vin;
+    }
+    num = num%1000000000;
+    //will have number in the 9th spot if u want county
+    if (num/100000000!=0) {
+        cout << "\tCounty: " << node->county;
+    }
+    num = num%100000000;
+    //will have number in the 8th spot if u want city
+    if (num/10000000!=0) {
+        cout << "\t\tCity: " << node->city;
+    }
+    num = num%10000000;
+    //will have number in the 7th spot if u want postalCode
+    if (num/1000000!=0) {
+        cout << "\t\tPostal Code: " << node->postalCode;
+    }
+    num = num%1000000;
+    ////will have number in the 6th spot if u want year
+    if (num/100000!=0) {
+        cout << "\tYear: " << node->year;
+    }
+    //will have number in the 5th spot if u want make
+    num = num%100000;
+    if (num/10000!=0) {
+        cout << "\n\t\tMake: " << node->make;
+    }
+    num = num%10000;
+    //will have number in the 4th spot if u want model
+    if (num/1000!=0) {
+        cout << "\t\tModel: " << node->model;
+    }
+    num = num%1000;
+    //will have number in the 3rd spot if u want range
+    if (num/100!=0) {
+        cout << "\tRange: " << node->range;
+    }
+    num = num%100;
+    //will have number in the 2nd spot if u want id
+    if (num/10!=0) {
+        cout << "\tID: " << node->id;
+    }
+    num = num%10;
+    //will have number in the 1rst spot if u want tract
+    if (num!=0) {
+        cout << "\tTract: " << node->tract;
+    }
 
 }
 
@@ -238,7 +290,7 @@ void maxHeap::loadHeap(string csvFileName) {
     std::cerr << "issue here"<<e.what() << std::endl;
     //cout<<"ISEEEUEEUEU************"<<endl;
   }
-  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap.\nIt took [***ADD TIME PLEASE HERE***] seconds\n"<<endl;
+  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap."<<endl;
 
 }
 
@@ -471,4 +523,14 @@ vector<Node*> maxHeap::searchIDHelper(string id) {
 
 vector<Node*> maxHeap::searchTractHelper(string tract) {
 
+}
+
+
+
+
+//HOLLY ADDING THIS
+void maxHeap::findTime(chrono::steady_clock::time_point before) {
+    chrono::steady_clock::time_point after = chrono::steady_clock::now();
+    chrono::duration<double> funcTime = chrono::duration_cast<chrono::duration<double>>(after - before);
+    cout<<"It took "<<setprecision(3)<<funcTime.count()<<" seconds to ";
 }
