@@ -22,28 +22,28 @@
 
 
 
-//In Order Traversal
-void maxHeap::inOrderTraversalHelper(Node *node) {
-  if (node!=nullptr) {
-    inOrderTraversalHelper(node->left);
+//In-Order Traversal
+void maxHeap::inOrderTraversalHelper(Node* node) {
+  if (node != nullptr) {
+    inOrderTraversalHelper(node -> left);
     printNode(node);
-    inOrderTraversalHelper(node->right);
+    inOrderTraversalHelper(node -> right);
   }
 }
 
-//Post Order Traversal and prints all the data
-void maxHeap::postOrderTraversalHelper(Node *node) {
-  if (node!=nullptr) {
+//Post-Order Traversal and prints all the data
+void maxHeap::postOrderTraversalHelper(Node* node) {
+  if (node != nullptr) {
     postOrderTraversalHelper(node->left);
     postOrderTraversalHelper(node->right);
     printNode(node);
-    cout<<endl;
+    cout << endl;
   }
 }
 
-//Pre Order Traversal
-void maxHeap::preOrderTraversalHelper(Node *node) {
-  if (node!=nullptr) {
+//Pre-Order Traversal
+void maxHeap::preOrderTraversalHelper(Node* node) {
+  if (node != nullptr) {
     printNode(node);
     preOrderTraversalHelper(node->left);
     preOrderTraversalHelper(node->right);
@@ -51,7 +51,7 @@ void maxHeap::preOrderTraversalHelper(Node *node) {
 }
 
 //will swap all variables in each node
-void maxHeap::swapValues(Node *current, Node *parent) {
+void maxHeap::swapValues(Node* current, Node* parent) {
 
   //stores parents values in temp variables
   string vinTemp = parent->vin;
@@ -73,8 +73,8 @@ void maxHeap::swapValues(Node *current, Node *parent) {
 
   //sets parent values to current values
   parent->vin = current->vin;
-  parent->county= current->county;
-  parent->city =current->city;
+  parent->county = current->county;
+  parent->city = current->city;
   parent->postalCode = current->postalCode;
   parent->year = current->year;
   parent->make = current->make;
@@ -91,16 +91,16 @@ void maxHeap::swapValues(Node *current, Node *parent) {
 
 
   //sets current to temp values
-  current->vin =vinTemp;
-  current->county =countyTemp;
-  current->city= cityTemp;
+  current->vin = vinTemp;
+  current->county = countyTemp;
+  current->city = cityTemp;
   current->postalCode = postalTemp;
   current->year = yearTemp;
-  current->make= makeTemp;
-  current->model= modelTemp;
-  current->range= rangeTemp;
-  current->id= idTemp;
-  current->tract= tractTemp;
+  current->make = makeTemp;
+  current->model = modelTemp;
+  current->range = rangeTemp;
+  current->id = idTemp;
+  current->tract = tractTemp;
   current->EV = EVtemp;
   current->CAFV = CAFVtemp;
   current->MSRP = MSRPtemp;
@@ -110,40 +110,42 @@ void maxHeap::swapValues(Node *current, Node *parent) {
   
 }
 
-//will pritn every value of the node
+//will print every value of the node
 void maxHeap::printNode(Node *node) {
-  cout<<"Vin: "<<(node->vin);
-  cout<<"\tCounty: "<<(node->county);
-  cout<<"\t\tCity: "<<(node->city);
-  cout<<"\t\tPostal Code: "<<(node->postalCode);
-  cout<<"\tYear: "<<(node->year);
-  cout<<"\n\t\tMake: "<<(node->make);
-  cout<<"\t\tModel: "<<(node->model);
-  cout<<"\tRange: "<<(node->range);
-  cout<<"\tID: "<<(node->id);
-  cout<<"\tTract: "<<(node->tract);
+  cout << "Vin: " << node->vin;
+  cout << "\tCounty: " << node->county;
+  cout << "\t\tCity: " << node->city;
+  cout << "\t\tPostal Code: " << node->postalCode;
+  cout << "\tYear: " << node->year;
+  cout << "\n\t\tMake: " << node->make;
+  cout << "\t\tModel: " << node->model;
+  cout << "\tRange: " << node->range;
+  cout << "\tID: " << node->id;
+  cout << "\tTract: " << node->tract;
 
 }
 
 //calls helper function to use root
 void maxHeap::postOrderTraversal() {
-  cout<<"Post Order Traversal of all elements (printing each element)"<<endl;
+  cout << "Post Order Traversal of all elements (printing each element!)" << endl;
   postOrderTraversalHelper(root);
 }
 
+//calls helper function to use root
 void maxHeap::preOrderTraversal() {
-  cout<<"Pre Order Traversal of all elements (printing each element)"<<endl;
+  cout << "Pre Order Traversal of all elements (printing each element!)" << endl;
   preOrderTraversalHelper(root);
 }
 
+//calls helper function to use root
 void maxHeap::inOrderTraversal() {
-  cout<<"In Order Traversal of all elements (printing each element)"<<endl;
+  cout << "In Order Traversal of all elements (printing each element!)" << endl;
   inOrderTraversalHelper(root);
 }
 
 //Loads the Heap values into the max heap from the file
 void maxHeap::loadHeap(string csvFileName) {
-  int count=0;
+  int count = 0;
 
   try {
     ifstream file(csvFileName);
@@ -214,36 +216,35 @@ void maxHeap::loadHeap(string csvFileName) {
 
   catch (std::exception& e) {
     std::cerr << "issue here"<<e.what() << std::endl;
-    //std::cout<<"ISEEEUEEUEU************"<<std::endl;
+    //cout<<"ISEEEUEEUEU************"<<endl;
   }
   cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap.\nIt took [***ADD TIME PLEASE HERE***] seconds\n"<<endl;
 
 }
 
 //adds node kinda
-void maxHeap::insertNode(string vin, string county, string city, string postalCode, string year, string make,
-  string model, string range, string id, string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU) {
+void maxHeap::insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract,string EV, string CAFV, string MSRP, string ld, string location, string EU) {
   //make first node
-  if (heapSize==0){
-    root = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
+  if (heapSize == 0){
+    root = new Node(vin, county, city, postalCode, year, make, model, range, id, tract, EV, CAFV, MSRP, ld, location, EU);
     heapSize++;
     return;
   }
 
   //if not first element make stack to find path of adding then follow path to add element
   stack<int> path;
-  int parentElement = (heapSize-1)/2;
+  int parentElement = (heapSize - 1) / 2;
   //print statments for de-bugging
   //cout<<heapSize<<"==>";
   //cout<<parentElement<<"\n";
   // 0 = left   and 1 = right
-  while(parentElement!=0){
-    if (parentElement%2==0){
+  while(parentElement != 0){
+    if (parentElement % 2 == 0){
       path.push(1);
     }else{
       path.push(0);
     }
-    parentElement =(parentElement-1)/2;
+    parentElement =(parentElement - 1) / 2;
   }
 
 
@@ -251,22 +252,22 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
   Node* parent = root;
   vector<Node*> parentsInPath;
   parentsInPath.push_back(parent);
-  while (!path.empty()){
+  while (!path.empty()) {
     int direction = path.top();
-    if (direction==0){
+    if (direction == 0) {
       parent = parent->left;
-    }else{
+    } else {
       parent = parent->right;
     }
     parentsInPath.push_back(parent);
     path.pop();
   }
-          //adds last oen
-  if (heapSize%2==0){
-    parent->right = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
+  //adds last oen
+  if (heapSize % 2 == 0) {
+    parent->right = new Node(vin, county, city, postalCode, year, make, model, range, id, tract, EV, CAFV, MSRP, ld, location, EU);
     parentsInPath.push_back(parent->right);
-  }else{
-    parent->left = new Node(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
+  } else{
+    parent->left = new Node(vin, county, city, postalCode, year, make, model, range, id, tract, EV, CAFV, MSRP, ld, location, EU);
     parentsInPath.push_back(parent->left);
   }
 
@@ -275,22 +276,21 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
   //like go up that path again but flip stuff :)
 
   //****currently sorted by vin ******
-  Node* current= parentsInPath[parentsInPath.size()-1];
-  for(int i = parentsInPath.size()-2; i>=0;i--){
+  Node* current = parentsInPath[parentsInPath.size()-1];
+  for(int i = parentsInPath.size() - 2; i >= 0; i--) {
     Node* parent = parentsInPath[i];
     //no need to swap
-    if (parent->vin>current->vin){
+    if (parent->vin > current->vin){
               break;
-            }
+    }
     //swap time !!!!! swaps values like in deletion of BST with 2 children
     swapValues(current, parent);
-
   }
   heapSize++;
 }
 
-
-vector<Node*> searchCountyHelper(Node* node, std::string county, vector<Node*>& matches) {
+//searches for nodes with matching county
+vector<Node*> searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -301,7 +301,8 @@ vector<Node*> searchCountyHelper(Node* node, std::string county, vector<Node*>& 
    searchCountyHelper(node->right, county, matches);
 }
 
-vector<Node*> searchCityHelper(Node* node, std::string city, vector<Node*>& matches) {
+//searches for nodes with matching city
+vector<Node*> searchCityHelper(Node* node, string city, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -312,7 +313,8 @@ vector<Node*> searchCityHelper(Node* node, std::string city, vector<Node*>& matc
    searchCityHelper(node->right, city, matches);
 }
 
-vector<Node*> searchYearHelper(Node* node, std::string year, vector<Node*>& matches) {
+//searches for nodes with matching year
+vector<Node*> searchYearHelper(Node* node, string year, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -323,7 +325,8 @@ vector<Node*> searchYearHelper(Node* node, std::string year, vector<Node*>& matc
    searchYearHelper(node->right, year, matches);
 }
 
-vector<Node*> searchMakeHelper(Node* node, std::string make, vector<Node*>& matches) {
+//searches for nodes with matching make
+vector<Node*> searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -334,7 +337,8 @@ vector<Node*> searchMakeHelper(Node* node, std::string make, vector<Node*>& matc
    searchMakeHelper(node->right, make, matches);
 }
 
-vector<Node*> searchModelHelper(Node* node, std::string model, vector<Node*>& matches) {
+//searches for nodes with matching model
+vector<Node*> searchModelHelper(Node* node, string model, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -347,8 +351,8 @@ vector<Node*> searchModelHelper(Node* node, std::string model, vector<Node*>& ma
 
 
 
-
-vector<Node*> searchVinHelper(Node* node, std::string vin, vector<Node*>& matches) {
+//searches for nodes with matching vin number
+vector<Node*> searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -359,7 +363,8 @@ vector<Node*> searchVinHelper(Node* node, std::string vin, vector<Node*>& matche
    searchVinHelper(node->right, vin, matches);
 }
 
-vector<Node*> searchPostalCodeHelper(Node* node, std::string postalCode, vector<Node*>& matches) {
+//searches for nodes with matching postal code
+vector<Node*> searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -370,7 +375,8 @@ vector<Node*> searchPostalCodeHelper(Node* node, std::string postalCode, vector<
    searchPostalCodeHelper(node->right, postalCode, matches);
 }
 
-vector<Node*> searchIDHelper(Node* node, std::string ID, vector<Node*>& matches) {
+//searches for nodes with matching id
+vector<Node*> searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -381,7 +387,8 @@ vector<Node*> searchIDHelper(Node* node, std::string ID, vector<Node*>& matches)
    searchIDHelper(node->right, ID, matches);
 }
 
-vector<Node*> searchTractHelper(Node* node, std::string tract, vector<Node*>& matches) {
+//searches for nodes with matching census tract number
+vector<Node*> searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -392,6 +399,8 @@ vector<Node*> searchTractHelper(Node* node, std::string tract, vector<Node*>& ma
    searchTractHelper(node->right, tract, matches);
 }
 
+//will be used when filtering by 2 or more conditions
+//it will take the vectors from the search functions and take the intersection of them
 vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two) {
     vector<Node*> result;
     for (int i = 0; i < one.size(); i++) {

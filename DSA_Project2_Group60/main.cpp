@@ -11,17 +11,17 @@
 
 int main() {
 
-    cout<<"Welcome to DSA Project 02\nDepth Versus Breath First Traversal\nCreators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi"<<endl;
-    cout<<"Group 60\n"<<endl;
+    cout << "Welcome to DSA Project 02\nDepth Versus Breath First Traversal\nCreators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi" << endl;
+    cout << "Group 60\n" << endl;
 
-    cout<<"ADD PURPOSE/REAL LIFE GOAL OF PROGRAM WHY HELP PEOPLE\n"<<endl;
+    cout << "ADD PURPOSE/REAL LIFE GOAL OF PROGRAM WHY HELP PEOPLE\n" << endl;
 
 
-    cout<<"The data used is Electric Vehicle Population Data in Washington\n\nWhen you are ready to load the data base press enter..."<<endl;
+    cout << "The data used is Electric Vehicle Population Data in Washington\n\nWhen you are ready to load the data base press enter..." << endl;
     string firstLine;
     getline(cin, firstLine);
 
-    cout<<"The loading of the nodes may take a few seconds...\n"<<endl;
+    cout << "The loading of the nodes may take a few seconds...\n" << endl;
 
     maxHeap heap;
     //ADD TIME!!!!!!!!!!!!!!!!!!*******************************************************************************
@@ -33,29 +33,29 @@ int main() {
 
     //dd intructions and other rules stuff here like any key to tart press
     string command = "";
-    cout<<"Please do not add extra spaces at the end of a command but title case does not matter. \nIf you are confused by commands please open the command menu"<<endl;
-    while (command!="end"&&command!="stop"&&command!="done"&&command!="-1"&&command!="0"&&command!=" ") {
-        cout<<"\nWhat would you liked to do? (to show commands type c or commands)"<<endl;
+    cout << "Please do not add extra spaces at the end of a command but title case does not matter. \nIf you are confused by commands please open the command menu" << endl;
+    while (command != "end" && command != "stop" && command != "done" && command != "-1" && command != "0" && command != " ") {
+        cout << "\nWhat would you liked to do? (to show commands type c or commands)" << endl;
         getline(cin, command);
         //makes commands all lower case
         for (char &c : command) {
-            c=tolower(c);
+            c = tolower(c);
         }
 
 
         if (command == "c"||command=="commands") {
             //print commands
-            cout<<"\nCommands: "<<endl;
-            cout<<"- print inorder"<<endl;
-            cout<<"- print preorder"<<endl;
-            cout<<"- print postorder"<<endl;
-            cout<<"- traverse inorder"<<endl;
-            cout<<"- traverse preorder"<<endl;
-            cout<<"- traverse postorder"<<endl;
-            cout<<"- ADD EVERYTHING ELSE PLEASE"<<endl;
-            cout<<"- to exit type: done, stop, end, 0, or -1"<<endl;
+            cout << "\nCommands: " << endl;
+            cout << "- print inorder" << endl;
+            cout << "- print preorder" << endl;
+            cout << "- print postorder" << endl;
+            cout << "- traverse inorder" << endl;
+            cout << "- traverse preorder" << endl;
+            cout << "- traverse postorder" << endl;
+            cout << "- ADD EVERYTHING ELSE PLEASE" << endl;
+            cout << "- to exit type: done, stop, end, 0, or -1" << endl;
         }
-        if (command=="end"||command=="stop"||command=="done"||command=="-1"||command=="0"||command==" ") {
+        if (command == "end" || command == "stop" || command == "done" || command == "-1" || command == "0" || command == " ") {
             continue;
         }
         if (command == "print inorder") {
@@ -79,14 +79,6 @@ int main() {
         else {
             cout <<"not a valid command"<<endl;
         }
-
-
     }
-
     return 0;
 }
-
-// TIP See CLion help at <a
-// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
-//  Also, you can try interactive lessons for CLion by selecting
-//  'Help | Learn IDE Features' from the main menu.

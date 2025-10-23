@@ -8,63 +8,62 @@
 
 #include <iostream>
 #include <sstream>
-
 #include <stack>
 #include <vector>
 #include <string>
 using namespace std;
 
 struct Node {
-    string vin; //unique vehicle number
-    string county; //county car is in
-    string city; //city car is in
-    string postalCode; //postal code registered in
-    string year; //year of model
-    string make; //car make
-    string model; //car model
-    string range; //Electric Range
-    string id; //Vehicle ID
+    string vin; // unique vehicle number
+    string county; // county the car is in
+    string city; // city the car is in
+    string postalCode; // postal code the car is registered in
+    string year; // year of model
+    string make; // car make
+    string model; // car model
+    string range; // electric range
+    string id; // vehicle ID
     string tract; // 2020 Census Tract
 
-    string EV; //Electric Vehicle Type
-    string CAFV; //Clean Alternative Fuel Vehicle (CAFV) Eligibility
+    string EV; // Electric Vehicle Type
+    string CAFV; // Clean Alternative Fuel Vehicle (CAFV) Eligibility
     string MSRP; // Base MSRP
-    string ld; //Legislative District
-    string location; //x and y location
-    string EU; //Electric Utility
+    string ld; // Legislative District
+    string location; // x and y location
+    string EU; // Electric Utility
 
-    //Skipped data for State since all the same
+    // Skipped data for State since all the same
 
     Node* left;
     Node* right;
 
-    //constructor
+    // node constructor
     Node(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU) {
         this->left = nullptr;
         this->right = nullptr;
 
         this->vin = vin;
-        this->county=county;
-        this->city=city;
-        this->postalCode=postalCode;
-        this->year=year;
-        this->make=make;
-        this->model= model;
-        this->range=range;
-        this->id=id;
-        this->tract=tract;
-        this->EV= EV;
-        this->CAFV=CAFV;
-        this->MSRP=MSRP;
-        this->ld=ld;
-        this->location=location;
-        this->EU=EU;
+        this->county = county;
+        this->city = city;
+        this->postalCode = postalCode;
+        this->year = year;
+        this->make = make;
+        this->model = model;
+        this->range = range;
+        this->id = id;
+        this->tract = tract;
+        this->EV = EV;
+        this->CAFV = CAFV;
+        this->MSRP = MSRP;
+        this->ld = ld;
+        this->location = location;
+        this->EU = EU;
     }
 
-    //overloaded == operator
+    // overloaded == operator
     bool operator==(const Node& other) const {
-        //once we decide which we want to use, we can just delete them from here so that it isn't considered when
-        //looking for exact matches (unless that's not how it works..)
+        // once we decide which we want to use, we can just delete them from here so that it isn't considered when
+        // looking for exact matches (unless that's not how it works..)
         bool vinB = this->vin == other.vin;
         bool countyB = this->county == other.county;
         bool cityB = this->city == other.city;
@@ -82,6 +81,7 @@ struct Node {
         bool locationB = this->location == other.location;
         bool EUB = this->EU == other.EU;
 
+        // if all the attributes are identical, then the nodes are identical :D
         return vinB && countyB && cityB && postalCodeB && yearB && makeB && modelB && rangeB && idB && tractB && EVB && CAFVB && MSRPB && ldB && locationB && EUB;
     }
 };
@@ -90,11 +90,11 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
-    void inOrderTraversalHelper(Node *node);
-    void postOrderTraversalHelper(Node *node);
-    void preOrderTraversalHelper(Node *node);
-    void swapValues(Node *current, Node *parent);
-    void printNode(Node *node);
+    void inOrderTraversalHelper(Node* node);
+    void postOrderTraversalHelper(Node* node);
+    void preOrderTraversalHelper(Node* node);
+    void swapValues(Node* current, Node* parent);
+    void printNode(Node* node);
 
     //search functions
     //Q: how specific do we want to go?
@@ -104,18 +104,18 @@ class maxHeap {
 
     //ADD STD::CLOCK
 
-    vector<Node*> searchCountyHelper(Node* node, std::string county, vector<Node*>& matches);
-    vector<Node*> searchCityHelper(Node* node, std::string city, vector<Node*>& matches);
-    vector<Node*> searchYearHelper(Node* node, std::string year, vector<Node*>& matches);
-    vector<Node*> searchMakeHelper(Node* node, std::string make, vector<Node*>& matches);
-    vector<Node*> searchModelHelper(Node* node, std::string model, vector<Node*>& matches);
+    vector<Node*> searchCountyHelper(Node* node, string county, vector<Node*>& matches);
+    vector<Node*> searchCityHelper(Node* node, string city, vector<Node*>& matches);
+    vector<Node*> searchYearHelper(Node* node, string year, vector<Node*>& matches);
+    vector<Node*> searchMakeHelper(Node* node, string make, vector<Node*>& matches);
+    vector<Node*> searchModelHelper(Node* node, string model, vector<Node*>& matches);
 
     //sus search functions
     //questionable if we keep them or not
-    vector<Node*> searchVinHelper(Node* node, std::string vin, vector<Node*>& matches);
-    vector<Node*> searchPostalCodeHelper(Node* node, std::string postalCode, vector<Node*>& matches);
-    vector<Node*> searchIDHelper(Node* node, std::string ID, vector<Node*>& matches);
-    vector<Node*> searchTractHelper(Node* node, std::string tract, vector<Node*>& matches);
+    vector<Node*> searchVinHelper(Node* node, string vin, vector<Node*>& matches);
+    vector<Node*> searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches);
+    vector<Node*> searchIDHelper(Node* node, string ID, vector<Node*>& matches);
+    vector<Node*> searchTractHelper(Node* node, string tract, vector<Node*>& matches);
 
     //definitive 'not doing' (I think)
     //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
@@ -125,25 +125,23 @@ class maxHeap {
     public:
         maxHeap(){ }
         void loadHeap(string csvFileName);
-        void insertNode(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU);
+        void insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU);
 
         void inOrderTraversal();
         void postOrderTraversal();
         void preOrderTraversal();
 
+    	//search functions that the user will "interact" with
+    	vector<Node*> searchCounty();
+    	vector<Node*> searchCity();
+    	vector<Node*> searchYear();
+    	vector<Node*> searchMake();
+    	vector<Node*> searchModel();
 
-    vector<Node*> searchCounty();
-    vector<Node*> searchCity();
-    vector<Node*> searchYear();
-    vector<Node*> searchMake();
-    vector<Node*> searchModel();
-
-    //maybe
-    vector<Node*> searchPostalCodeHelper();
-    vector<Node*> searchIDHelper();
-    vector<Node*> searchTractHelper();
+    	//maybe include, not sure yet
+    	vector<Node*> searchPostalCodeHelper();
+    	vector<Node*> searchIDHelper();
+    	vector<Node*> searchTractHelper();
 };
-
-
 
 #endif //MAXHEAP_H
