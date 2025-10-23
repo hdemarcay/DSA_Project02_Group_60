@@ -137,16 +137,16 @@ class maxHeap {
 		void preOrderTraversal();
 
     	//search functions that the user will "interact" with
-    	vector<Node*> searchCounty();
-    	vector<Node*> searchCity();
-    	vector<Node*> searchYear();
-    	vector<Node*> searchMake();
-    	vector<Node*> searchModel();
+    	vector<Node*> searchCounty(string county);
+    	vector<Node*> searchCity(string city);
+    	vector<Node*> searchYear(string year);
+    	vector<Node*> searchMake(string make);
+    	vector<Node*> searchModel(string model);
 
     	//maybe include, not sure yet
-    	vector<Node*> searchPostalCodeHelper();
-    	vector<Node*> searchIDHelper();
-    	vector<Node*> searchTractHelper();
+    	vector<Node*> searchPostalCodeHelper(string postalCode);
+    	vector<Node*> searchIDHelper(string id);
+    	vector<Node*> searchTractHelper(string tract);
 };
 
 #endif //MAXHEAP_H

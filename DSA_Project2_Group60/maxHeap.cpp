@@ -433,3 +433,42 @@ vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two) {
     }
     return result;
 }
+
+//search function the user "works" with
+vector<Node*> searchCounty(string county) {
+    vector<Node*> result;
+    searchCountyHelper(this->node, county, result);
+    return result;
+}
+
+vector<Node*> searchCity(string city) {
+    vector<Node*> result;
+    searchCityHelper(this->node, county, result);
+    return result;
+}
+
+vector<Node*> searchYear(string year) {
+
+}
+
+vector<Node*> searchMake(string make) {
+
+}
+
+vector<Node*> searchModel(string model) {
+
+}
+
+
+//maybe include, not sure yet
+vector<Node*> searchPostalCodeHelper(string postalCode) {
+
+}
+
+vector<Node*> searchIDHelper(string id) {
+
+}
+
+vector<Node*> searchTractHelper(string tract) {
+
+}
