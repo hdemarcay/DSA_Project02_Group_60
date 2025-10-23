@@ -38,7 +38,7 @@ struct Node {
     Node* right;
 
     // node constructor
-    Node(string vin,string county,string city,string postalCode,string year,string make,string model,string range,string id,string tract,string EV, string CAFV, string MSRP, string ld, string location,string EU) {
+    Node(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU) {
         this->left = nullptr;
         this->right = nullptr;
 
@@ -90,7 +90,6 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
-    //wait i forgot, what do these do?
     void inOrderTraversalHelper(Node* node, bool print);
     void postOrderTraversalHelper(Node* node, bool print);
     void preOrderTraversalHelper(Node* node, bool print);
@@ -125,13 +124,13 @@ class maxHeap {
     vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
 
     public:
-        maxHeap(){ }
-        void loadHeap(string csvFileName);
-        void insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU);
+		maxHeap(){ }
+		void loadHeap(string csvFileName);
+		void insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU);
 
-        void printInOrderTraversal();
-        void printPostOrderTraversal();
-        void printPreOrderTraversal();
+		void printInOrderTraversal();
+		void printPostOrderTraversal();
+		void printPreOrderTraversal();
 		void inOrderTraversal();
 		void postOrderTraversal();
 		void preOrderTraversal();

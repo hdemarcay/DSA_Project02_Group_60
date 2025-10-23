@@ -238,7 +238,7 @@ void maxHeap::loadHeap(string csvFileName) {
     std::cerr << "issue here"<<e.what() << std::endl;
     //cout<<"ISEEEUEEUEU************"<<endl;
   }
-  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap.\nIt took [***ADD TIME PLEASE HERE***] seconds\n"<<endl;
+  cout << "All the data has been loaded into the Max Heap.\nThere is a total of " << count << " nodes in the heap.\nIt took [***ADD TIME PLEASE HERE***] seconds\n" << endl;
 
 }
 
@@ -448,27 +448,39 @@ vector<Node*> maxHeap::searchCity(string city) {
 }
 
 vector<Node*> maxHeap::searchYear(string year) {
-
+    vector<Node*> result;
+    searchCityHelper(root, year, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchMake(string make) {
-
+    vector<Node*> result;
+    searchCityHelper(root, make, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchModel(string model) {
-
+    vector<Node*> result;
+    searchCityHelper(root, model, result);
+    return result;
 }
 
 
 //maybe include, not sure yet
 vector<Node*> maxHeap::searchPostalCodeHelper(string postalCode) {
-
+    vector<Node*> result;
+    searchCityHelper(root, postalCode, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchIDHelper(string id) {
-
+    vector<Node*> result;
+    searchCityHelper(root, id, result);
+    return result;
 }
 
 vector<Node*> maxHeap::searchTractHelper(string tract) {
-
+    vector<Node*> result;
+    searchCityHelper(root, tract, result);
+    return result;
 }

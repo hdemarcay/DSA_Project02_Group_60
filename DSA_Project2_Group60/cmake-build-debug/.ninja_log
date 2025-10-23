@@ -1,19 +1,5 @@
 # ninja log v6
 1058	1212	7826180470860768	DSA_Porject2_Tests.exe	1092283cec782fdf
-50	1344	7826196468381419	CMakeFiles/DSA_Project2_Group60.dir/maxHeap.cpp.obj	8a99f2d9e23abe42
-57	1183	7826196644623741	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-1184	1376	7826196655883222	DSA_Project2_Group60.exe	bdaf1d897faa85de
-10	1132	7827595667230081	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-1133	1864	7827595678452238	DSA_Project2_Group60.exe	bdaf1d897faa85de
-7	929	7827596068932469	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-930	1155	7827596078175461	DSA_Project2_Group60.exe	bdaf1d897faa85de
-41	1141	7827596447535998	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-1142	1356	7827596458547736	DSA_Project2_Group60.exe	bdaf1d897faa85de
-11	1260	7827597211198348	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-1261	1471	7827597223698186	DSA_Project2_Group60.exe	bdaf1d897faa85de
-32	992	7827598246226226	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
-42	1270	7827598246318873	CMakeFiles/DSA_Project2_Group60.dir/maxHeap.cpp.obj	8a99f2d9e23abe42
-1270	1467	7827598258611462	DSA_Project2_Group60.exe	bdaf1d897faa85de
 42	1460	7827598482316990	CMakeFiles/DSA_Project2_Group60.dir/maxHeap.cpp.obj	8a99f2d9e23abe42
-1462	1647	7827598496504114	DSA_Project2_Group60.exe	bdaf1d897faa85de
 184	2576	7829478543847842	CMakeFiles/DSA_Project2_Group60.dir/main.cpp.obj	a85611a19941dd34
+1462	1647	7827598496504114	DSA_Project2_Group60.exe	bdaf1d897faa85de
