@@ -90,9 +90,11 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
-    void inOrderTraversalHelper(Node* node,bool print);
+    //wait i forgot, what do these do?
+    void inOrderTraversalHelper(Node* node, bool print);
     void postOrderTraversalHelper(Node* node, bool print);
-    void preOrderTraversalHelper(Node* node,bool print);
+    void preOrderTraversalHelper(Node* node, bool print);
+
     void swapValues(Node* current, Node* parent);
     void printNode(Node* node);
 
@@ -104,18 +106,18 @@ class maxHeap {
 
     //ADD STD::CLOCK
 
-    vector<Node*> searchCountyHelper(Node* node, string county, vector<Node*>& matches);
-    vector<Node*> searchCityHelper(Node* node, string city, vector<Node*>& matches);
-    vector<Node*> searchYearHelper(Node* node, string year, vector<Node*>& matches);
-    vector<Node*> searchMakeHelper(Node* node, string make, vector<Node*>& matches);
-    vector<Node*> searchModelHelper(Node* node, string model, vector<Node*>& matches);
+    void searchCountyHelper(Node* node, string county, vector<Node*>& matches);
+    void searchCityHelper(Node* node, string city, vector<Node*>& matches);
+    void searchYearHelper(Node* node, string year, vector<Node*>& matches);
+    void searchMakeHelper(Node* node, string make, vector<Node*>& matches);
+    void searchModelHelper(Node* node, string model, vector<Node*>& matches);
 
     //sus search functions
     //questionable if we keep them or not
-    vector<Node*> searchVinHelper(Node* node, string vin, vector<Node*>& matches);
-    vector<Node*> searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches);
-    vector<Node*> searchIDHelper(Node* node, string ID, vector<Node*>& matches);
-    vector<Node*> searchTractHelper(Node* node, string tract, vector<Node*>& matches);
+    void searchVinHelper(Node* node, string vin, vector<Node*>& matches);
+    void searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches);
+    void searchIDHelper(Node* node, string ID, vector<Node*>& matches);
+    void searchTractHelper(Node* node, string tract, vector<Node*>& matches);
 
     //definitive 'not doing' (I think)
     //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility

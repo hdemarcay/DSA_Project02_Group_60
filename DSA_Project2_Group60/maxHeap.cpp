@@ -310,7 +310,7 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
 }
 
 //searches for nodes with matching county
-vector<Node*> searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
+void searchCountyHelper(Node* node, string county, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -322,7 +322,7 @@ vector<Node*> searchCountyHelper(Node* node, string county, vector<Node*>& match
 }
 
 //searches for nodes with matching city
-vector<Node*> searchCityHelper(Node* node, string city, vector<Node*>& matches) {
+void searchCityHelper(Node* node, string city, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -334,7 +334,7 @@ vector<Node*> searchCityHelper(Node* node, string city, vector<Node*>& matches) 
 }
 
 //searches for nodes with matching year
-vector<Node*> searchYearHelper(Node* node, string year, vector<Node*>& matches) {
+void searchYearHelper(Node* node, string year, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -346,7 +346,7 @@ vector<Node*> searchYearHelper(Node* node, string year, vector<Node*>& matches) 
 }
 
 //searches for nodes with matching make
-vector<Node*> searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
+void searchMakeHelper(Node* node, string make, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -358,7 +358,7 @@ vector<Node*> searchMakeHelper(Node* node, string make, vector<Node*>& matches) 
 }
 
 //searches for nodes with matching model
-vector<Node*> searchModelHelper(Node* node, string model, vector<Node*>& matches) {
+void searchModelHelper(Node* node, string model, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -372,7 +372,7 @@ vector<Node*> searchModelHelper(Node* node, string model, vector<Node*>& matches
 
 
 //searches for nodes with matching vin number
-vector<Node*> searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
+void searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -384,7 +384,7 @@ vector<Node*> searchVinHelper(Node* node, string vin, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching postal code
-vector<Node*> searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
+void searchPostalCodeHelper(Node* node, string postalCode, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -396,7 +396,7 @@ vector<Node*> searchPostalCodeHelper(Node* node, string postalCode, vector<Node*
 }
 
 //searches for nodes with matching id
-vector<Node*> searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
+void searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
    if (!node) {
       return;
    }
@@ -408,7 +408,7 @@ vector<Node*> searchIDHelper(Node* node, string ID, vector<Node*>& matches) {
 }
 
 //searches for nodes with matching census tract number
-vector<Node*> searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
+void searchTractHelper(Node* node, string tract, vector<Node*>& matches) {
    if (!node) {
       return;
    }
