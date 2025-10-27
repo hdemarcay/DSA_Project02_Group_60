@@ -1,119 +1,242 @@
+// DSA Project 02
+// Group 60
+// Creators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi
+// Remote Git: https://github.com/hdemarcay/DSA_Project02_Group_60.git
+
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include "maxHeap.h"
 
-//PLEASE CHECK TITLES
+using Clock = std::chrono::steady_clock;
+using Duration = std::chrono::duration<double>;
+using namespace std;
 
-//DSA Project 02
-//Group 60
-//Creators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi
-//git: https://github.com/hdemarcay/DSA_Project02_Group_60.git
+// Display startup information, including our team/project information, the
+// introduction and purpose of our project, as well as
+void displayStartup() {
+
+    // Project and team information
+    cout << "____________________________________________________________" << endl;
+    cout << "Welcome to DSA Project 02" << endl;
+    cout << "Depth Versus Breadth First Traversal" << endl;
+    cout << "Creators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi" << endl;
+    cout << "COP3530: Group 60" << endl;
+    cout << "____________________________________________________________" << endl;
+
+    // Welcome screen and purpose
+    cout << "Welcome to the Washington Vehicle Lookup!" << endl << endl;
+    cout << "In order to properly differentiate, different objects are assigned certain identifiers.\n"
+         << "We have barcodes for retail products, IP addresses for devices, and student IDs in schools,\n"
+         << "to name a few. Having these makes the process of finding, traversing, and identifying much\n"
+         << "faster.)" << endl << endl;
+    cout << "Vehicles are identified through their VIN (Vehicle Identification Number). The purposes of\n"
+         << "this program is to help users find registered car information as quickly and efficiently\n"
+         << "as possible. This could include law enforcement, government administrative companies (such\n"
+         << "as the DMV), or consumers." << endl << endl;
+    cout << "Users can simply find VINs, or return a number of VINs based off provided information.\n"
+         << "This program will allow you to search and traverse for a VIN, search and traverse based\n"
+         << "off requirements, and do it depending on how the user specifies: depth or breadth. This\n"
+         << "way, the user can understand and use the most efficient method possible with our clock.\n" << endl;
+
+    // Data credits
+    cout << "The data used is Electric Vehicle Population Data in Washington collected by the Washington\n"
+         << "State Department of Licensing, last updated in 2025." << endl;
+}
+
+// Display instructions related to the project, including what commands users can
+// use and how they should input it.
+void displayInstructions() {
+    cout << "____________________________________________________________" << endl;
+    cout << "Possible Commands: (You can use \"-c\" to see all the commands. " << endl;
+    cout << "Note: 1.) Please do not add extra spaces after commands, 2.) Commands aren't case sensitive.\n" << endl;
+
+    cout << "1.) Print Commands - traverse and print the entire dataset and\n"
+        << "return the entire time it takes." << endl;
+    cout << "\tPrint Inorder (\"print inorder\")" << endl;
+    cout << "\tPrint Preorder (\"print preorder\")" << endl;
+    cout << "\tPrint Postorder (\"print postorder\")" << endl;
+    cout << "\tPrint Level Order (\"print levelorder\")" << endl << endl;
+
+    cout << "2.) Traversing Commands - traverse through the entire dataset and\n"
+         << "return the entire time it takes." << endl;
+    cout << "\tTraverse Inorder (\"traverse inorder\")" << endl;
+    cout << "\tTraverse Preorder (\"traverse preorder\")" << endl;
+    cout << "\tTraverse Postorder (\"traverse postorder\")" << endl;
+    cout << "\tTraverse Level Order (\"traverse levelorder\")" << endl << endl;
+
+    cout << "3.) Search Commands - can provide a VIN and be returned information\n"
+         << "registered under that specific vehicle OR provide a parameter (county,\n"
+         << "city, postalCode, year, make, or model) and be returned VINs that\n"
+         << "fall under that parameter." << endl;
+    cout << "\tSearch vin {VIN} (i.e. \"search vin WA1E2AFY8R\")" << endl;
+    cout << "\tSearch {parameter} {value} (i.e. \"search city Olympia\")" << endl << endl;;
+
+    cout << "To exit, you can type: done, stop, end, 0, or -1" << endl << endl;
+}
+
+// Used to check if command is part of vector; used specifically
+// for checking end commands.
+bool contains(vector<string> &commands, const string &givenCommand) {
+    for (string &command : commands) {
+        if (command == givenCommand) {
+            return true;
+        }
+    }
+    return false;
+}
 
 int main() {
+    displayStartup();
+    displayInstructions();
 
-    cout << "Welcome to DSA Project 02\nDepth Versus Breath First Traversal\nCreators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi" << endl;
-    cout << "Group 60\n" << endl;
-
-    //thoughts? also, DO NOT REMOVE THE EXTRA SPACES AFTER 'TO', I added it to make it prettier when it prints :D
-    cout << "Our car lookup helps users find their dream car as quickly and efficiently as possible. In today's world, speed matters,"
-            "and we make finding the right car seamless. This benefits both consumers and businesses by matching the right cars to   "
-            "the right buyers and reducing returns due to dissatisfaction." << endl;
-
-
-    cout << "The data used is Electric Vehicle Population Data in Washington\n\nWhen you are ready to load the data base press enter..." << endl;
+    cout << "When you are ready to load the data base press enter..." << endl;
     string firstLine;
     getline(cin, firstLine);
-
     cout << "The loading of the nodes may take a few seconds...\n" << endl;
 
+    // Loads the heap and measures the time before and after loading the heap.
     maxHeap heap;
-    //ADD TIME!!!!!!!!!!!!!!!!!!*******************************************************************************
-    chrono::steady_clock::time_point beforeLoad = chrono::steady_clock::now();
+    Clock::time_point beforeLoad = Clock::now();
     heap.loadHeap("Electric_Vehicle_Population_Data_attempting.csv");
-    chrono::steady_clock::time_point afterLoad = chrono::steady_clock::now();
-    chrono::duration<double> loadTime = chrono::duration_cast<chrono::duration<double>>(afterLoad - beforeLoad);
-    cout << "It took "<< std::setprecision(3) << loadTime.count() << " seconds to load the data\n" << endl;
+    Clock::time_point afterLoad = Clock::now();
+    Duration loadTime = chrono::duration_cast<Duration>(afterLoad - beforeLoad);
+    cout << "It took "<< setprecision(3) << loadTime.count() << " seconds to load the data." << endl;
 
-    //timer.restart();
-    //timer.getElapsedTime();
-    //std::Clock timer;
-
-    //dd intructions and other rules stuff here like any key to tart press
     string command = "";
-    cout << "Please do not add extra spaces at the end of a command but title case does not matter. \nIf you are confused by commands please open the command menu" << endl;
-    while (command != "end" && command != "stop" && command != "done" && command != "-1" && command != "0" && command != " ") {
-        cout << "\nWhat would you liked to do? (to show commands type c or commands)" << endl;
-        getline(cin, command);
-        //makes commands all lower case
+    vector<string> exitCommands = {"end", "stop", "done", "-1", "0", " "};
+    while (!contains(exitCommands, command)) {
+
+        cout << "\nWhat would you like to do? (to show commands type -c or commands)" << endl;
+
+        string line;
+        getline(cin, line);
+        istringstream in(line);
+
+        string command;
+        getline(in, command, ' ');
+
+        // Make command lower case
         for (char &c : command) {
             c = tolower(c);
         }
 
-
-        if (command == "c"||command=="commands") {
-            //print commands
-            cout << "\nCommands: " << endl;
-            cout << "- print inorder" << endl;
-            cout << "- print preorder" << endl;
-            cout << "- print postorder" << endl;
-            cout << "- traverse inorder" << endl;
-            cout << "- traverse preorder" << endl;
-            cout << "- traverse postorder" << endl;
-            cout << "- ADD EVERYTHING ELSE PLEASE" << endl;
-            cout << "- to exit type: done, stop, end, 0, or -1" << endl;
+        // Display the instructions/commands again
+        if (command == "-c" || command == "commands") {
+            displayInstructions();
         }
-        if (command == "end" || command == "stop" || command == "done" || command == "-1" || command == "0" || command == " ") {
+
+        // If an exit command is provided, continue to exit the loop
+        if (contains(exitCommands, command)) {
             continue;
         }
-        if (command == "print inorder") {
-            //gets time before function called
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.printInOrderTraversal();
-            //find the tota; time
-            heap.findTime(start);
-            cout << " print inorder\n" << endl;
-        }
-        else if (command == "print preorder") {
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.printPreOrderTraversal();
-            heap.findTime(start);
-            cout << " print preorder\n" << endl;
-        }
-        else if (command == "print postorder") {
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.printPostOrderTraversal();
-            heap.findTime(start);
-            cout << " print postorder\n" << endl;
 
-        } else if (command == "traverse inorder") {
-            cout << "this might take a few seconds :)" << endl;
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.inOrderTraversal();
-            heap.findTime(start);
-            cout << " traverse inorder\n" << endl;
+        // -------------- Printing Commands --------------
+        if (command == "print") {
 
-        }else if (command == "traverse preorder") {
-            cout << "this might take a few seconds :)" << endl;
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.postOrderTraversal();
-            heap.findTime(start);
-            cout << " traverse preorder\n" << endl;
+            string type;
+            getline(in, type);
 
-        } else if (command == "traverse postorder") {
-            cout<<"this might take a few seconds :)"<<endl;
-            chrono::steady_clock::time_point start = chrono::steady_clock::now();
-            heap.preOrderTraversal();
-            heap.findTime(start);
-            cout << " traverse postorder\n" << endl;
-        } else if (command == "ADD OTHER COMMANDS") {
-            //TO DO:
-            cout << "ADD OTHER COMMANDS" << endl;
-            //like search
-            // how many categories? what category
+            if (type == "inorder") {
+                // Gets time before function called
+                Clock::time_point start = Clock::now();
+                heap.printInOrderTraversal();
+                // Find the total time
+                heap.findTime(start);
+                cout << "print inorder!" << endl;
+            }
+
+            else if (type == "preorder") {
+                Clock::time_point start = Clock::now();
+                heap.printPreOrderTraversal();
+                heap.findTime(start);
+                cout << "print preorder!" << endl;
+            }
+
+            else if (type == "postorder") {
+                Clock::time_point start = Clock::now();
+                heap.printPostOrderTraversal();
+                heap.findTime(start);
+                cout << "print postorder!" << endl;
+            }
+
         }
+
+        // -------------- Traversing Commands --------------
+        if (command == "traverse") {
+
+            string type;
+            getline(in, type);
+
+            if (type == "inorder") {
+                cout << "This might take a few seconds..." << endl;
+                Clock::time_point start = Clock::now();
+                heap.inOrderTraversal();
+                heap.findTime(start);
+                cout << "traverse inorder!" << endl;
+            }
+
+            else if (type == "preorder") {
+                cout << "this might take a few seconds..." << endl;
+                Clock::time_point start = Clock::now();
+                heap.preOrderTraversal();
+                heap.findTime(start);
+                cout << "traverse preorder!" << endl;
+            }
+
+            else if (type == "postorder") {
+                cout << "This might take a few seconds..." << endl;
+                Clock::time_point start = Clock::now();
+                heap.postOrderTraversal();
+                heap.findTime(start);
+                cout << " traverse postorder!" << endl;
+            }
+        }
+
+        // -------------- Search Commands --------------
+        // Possible parameter searches are county, city, postal code, year, make, and model
+        else if (command == "search") {
+
+            string parameter;
+            getline(in, parameter, ' ');
+            string value;
+            getline(in, value, ' ');
+
+            if (parameter == "vin") {
+
+            }
+
+            else if (parameter == "county") {
+
+            }
+
+            else if (parameter == "city") {
+
+            }
+
+            else if (parameter == "postalCode") {
+
+            }
+
+            else if (parameter == "year") {
+
+            }
+
+            else if (parameter == "make") {
+            }
+
+            else if (parameter == "model") {
+
+            }
+
+            else {
+                cout << "Not a valid parameter. Possible parameter options are\n"
+                     << "vin, county, city, postalCode, year, make, and model." << endl;
+            }
+        }
+
         else {
-            cout << "not a valid command" << endl;
+            cout << "Not a valid command. Type \"-c\" to see all valid commands." << endl;
         }
     }
     return 0;
