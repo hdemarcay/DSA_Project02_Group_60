@@ -1,7 +1,7 @@
-//DSA Project 02
-//Group 60
-//Creators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi
-//git: https://github.com/hdemarcay/DSA_Project02_Group_60.git
+// DSA Project 02
+// Group 60
+// Creators: Holly DeMarcay, Tiana Dumitrescu, Kayla Foroughi
+// git: https://github.com/hdemarcay/DSA_Project02_Group_60.git
 
 #ifndef MAXHEAP_H
 #define MAXHEAP_H
@@ -14,35 +14,33 @@
 #include <chrono>
 #include <fstream>
 
+using Clock = std::chrono::steady_clock;
 using namespace std;
 
 struct Node {
-    string vin; // unique vehicle number
-    string county; // county the car is in
-    string city; // city the car is in
-    string postalCode; // postal code the car is registered in
-    string year; // year of model
-    string make; // car make
-    string model; // car model
-    string range; // electric range
-    string id; // vehicle ID
-    string tract; // 2020 Census Tract
+	Node* left;
+	Node* right;
 
+    string vin; // Unique vehicle number
+    string county; // County car is in
+    string city; // City car is in
+    string postalCode; // Postal code car is registered in
+    string year; // Year of model
+    string make; // Car make
+    string model; // Car model
+    string range; // Electric range
+    string id; // Vehicle ID
+    string tract; // 2020 Census Tract
     string EV; // Electric Vehicle Type
     string CAFV; // Clean Alternative Fuel Vehicle (CAFV) Eligibility
     string MSRP; // Base MSRP
     string ld; // Legislative District
-    string location; // x and y location
+    string location; // X and Y location
     string EU; // Electric Utility
 
-    // Skipped data for State since all the same
-
-    Node* left;
-    Node* right;
-
-    // node constructor
+    // Constructor
     Node(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU) {
-        this->left = nullptr;
+    	this->left = nullptr;
         this->right = nullptr;
 
         this->vin = vin;
@@ -63,7 +61,7 @@ struct Node {
         this->EU = EU;
     }
 
-    // overloaded == operator
+    // Overloaded == operator; Defines the equality operator for our Node class.
     bool operator==(const Node& other) const {
         // once we decide which we want to use, we can just delete them from here so that it isn't considered when
         // looking for exact matches (unless that's not how it works..)
@@ -84,7 +82,7 @@ struct Node {
         bool locationB = this->location == other.location;
         bool EUB = this->EU == other.EU;
 
-        // if all the attributes are identical, then the nodes are identical :D
+        // If all the attributes are identical, then the nodes are identical :D
         return vinB && countyB && cityB && postalCodeB && yearB && makeB && modelB && rangeB && idB && tractB && EVB && CAFVB && MSRPB && ldB && locationB && EUB;
     }
 };
@@ -93,13 +91,14 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
+	void swapValues(Node* current, Node* parent);
+	void printNode(Node* node);
+	void printNode(Node* node,int Num);
+
     void inOrderTraversalHelper(Node* node, bool print);
     void postOrderTraversalHelper(Node* node, bool print);
     void preOrderTraversalHelper(Node* node, bool print);
-
-    void swapValues(Node* current, Node* parent);
-    void printNode(Node* node);
-	void printNode(Node* node,int Num);
+	void levelOrderTraversalHelper(Node* node, bool print);
 
     //search functions
     //Q: how specific do we want to go?
@@ -109,16 +108,24 @@ class maxHeap {
 
     //ADD STD::CLOCK
 
+	void searchVinHelperDFS(Node* node, string vin, vector<Node*>& matches);
     void searchCountyHelperDFS(Node* node, string county, vector<Node*>& matches);
     void searchCityHelperDFS(Node* node, string city, vector<Node*>& matches);
+	void searchPostalCodeHelperDFS(Node* node, string postalCode, vector<Node*>& matches);
     void searchYearHelperDFS(Node* node, string year, vector<Node*>& matches);
     void searchMakeHelperDFS(Node* node, string make, vector<Node*>& matches);
     void searchModelHelperDFS(Node* node, string model, vector<Node*>& matches);
 
+	// void searchVinHelperBFS(Node* node, string vin, vector<Node*>& matches);
+	// void searchCountyHelperBFS(Node* node, string county, vector<Node*>& matches);
+	// void searchCityHelperBFS(Node* node, string city, vector<Node*>& matches);
+	// void searchPostalCodeHelperBFS(Node* node, string postalCode, vector<Node*>& matches);
+	// void searchYearHelperBFS(Node* node, string year, vector<Node*>& matches);
+	// void searchMakeHelperBFS(Node* node, string make, vector<Node*>& matches);
+	// void searchModelHelperBFS(Node* node, string model, vector<Node*>& matches);
+
     //sus search functions
     //questionable if we keep them or not
-    void searchVinHelperDFS(Node* node, string vin, vector<Node*>& matches);
-    void searchPostalCodeHelperDFS(Node* node, string postalCode, vector<Node*>& matches);
     void searchIDHelperDFS(Node* node, string ID, vector<Node*>& matches);
     void searchTractHelperDFS(Node* node, string tract, vector<Node*>& matches);
 
@@ -128,33 +135,43 @@ class maxHeap {
     vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
 
     public:
-		maxHeap(){ }
+		maxHeap(){}
 		void loadHeap(string csvFileName);
 		void insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract, string EV, string CAFV, string MSRP, string ld, string location, string EU);
 
+		// Accessible printing functions
 		void printInOrderTraversal();
 		void printPostOrderTraversal();
 		void printPreOrderTraversal();
+
+		// Accessible traversal functions
 		void inOrderTraversal();
 		void postOrderTraversal();
 		void preOrderTraversal();
 
-    	//search functions that the user will "interact" with
+    	// Accessible search functions (DFS)
+		//vector<Node*> searchVinDFS(string vin);
     	vector<Node*> searchCountyDFS(string county);
     	vector<Node*> searchCityDFS(string city);
+		vector<Node*> searchPostalCodeDFS(string postalCode);
     	vector<Node*> searchYearDFS(string year);
     	vector<Node*> searchMakeDFS(string make);
     	vector<Node*> searchModelDFS(string model);
-
-    	//maybe include, not sure yet
-    	vector<Node*> searchPostalCodeDFS(string postalCode);
-    	vector<Node*> searchIDDFS(string id);
+		vector<Node*> searchIdDFS(string id);
     	vector<Node*> searchTractDFS(string tract);
 
-		//ADD THE BFS VERSION OF THE SEARCHES
+		// Accessible search functions (BFS)
+		// vector<Node*> searchVinBFS(string vin);
+		// vector<Node*> searchCountyBFS(string county);
+		// vector<Node*> searchCityBFS(string city);
+		// vector<Node*> searchPostalCodeBFS(string postalCode);
+		// vector<Node*> searchYearBFS(string year);
+		// vector<Node*> searchMakeBFS(string make);
+		// vector<Node*> searchModelBFS(string model);
+		// vector<Node*> searchTractBFS(string tract);
 
-	//ADD THIS
-	void findTime(chrono::steady_clock::time_point before);
+		// ADD THIS
+		void findTime(Clock::time_point before);
 };
 
 #endif //MAXHEAP_H
