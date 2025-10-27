@@ -13,7 +13,7 @@ using Duration = std::chrono::duration<double>;
 using namespace std;
 
 // Display startup information, including our team/project information, the
-// introduction and purpose of our project, as well as
+// introduction and purpose of our project, as well as data credits.
 void displayStartup() {
 
     // Project and team information
@@ -68,9 +68,10 @@ void displayInstructions() {
     cout << "3.) Search Commands - can provide a VIN and be returned information\n"
          << "registered under that specific vehicle OR provide a parameter (county,\n"
          << "city, postalCode, year, make, or model) and be returned VINs that\n"
-         << "fall under that parameter." << endl;
-    cout << "\tSearch vin {VIN} (i.e. \"search vin WA1E2AFY8R\")" << endl;
-    cout << "\tSearch {parameter} {value} (i.e. \"search city Olympia\")" << endl << endl;;
+         << "fall under that parameter. You will specify the type of search you'd\n"
+         << "like and the time it takes to complete will be returned as well." << endl;
+    cout << "\tSearch {type} vin {VIN} (i.e. \"search breadth vin WA1E2AFY8R\")" << endl;
+    cout << "\tSearch {type} {parameter} {value} (i.e. \"search depth city Olympia\")" << endl << endl;
 
     cout << "To exit, you can type: done, stop, end, 0, or -1" << endl << endl;
 }
@@ -134,6 +135,7 @@ int main() {
         // -------------- Printing Commands --------------
         if (command == "print") {
 
+            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
 
@@ -159,12 +161,12 @@ int main() {
                 heap.findTime(start);
                 cout << "print postorder!" << endl;
             }
-
         }
 
         // -------------- Traversing Commands --------------
         if (command == "traverse") {
 
+            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
 
@@ -197,41 +199,72 @@ int main() {
         // Possible parameter searches are county, city, postal code, year, make, and model
         else if (command == "search") {
 
+            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
+            string type;
+            getline(in, type, ' ');
             string parameter;
             getline(in, parameter, ' ');
             string value;
             getline(in, value, ' ');
 
-            if (parameter == "vin") {
+            if (type == "depth") {
+                if (parameter == "vin") {
+                }
 
+                else if (parameter == "county") {
+                }
+
+                else if (parameter == "city") {
+                }
+
+                else if (parameter == "postalCode") {
+                }
+
+                else if (parameter == "year") {
+                }
+
+                else if (parameter == "make") {
+                }
+
+                else if (parameter == "model") {
+                }
+
+                else {
+                    cout << "Not a valid parameter. Possible parameter options are\n"
+                         << "vin, county, city, postalCode, year, make, and model." << endl;
+                }
             }
 
-            else if (parameter == "county") {
+            else if (type == "breadth") {
+                if (parameter == "vin") {
+                }
 
-            }
+                else if (parameter == "county") {
+                }
 
-            else if (parameter == "city") {
+                else if (parameter == "city") {
+                }
 
-            }
+                else if (parameter == "postalCode") {
+                }
 
-            else if (parameter == "postalCode") {
+                else if (parameter == "year") {
+                }
 
-            }
+                else if (parameter == "make") {
+                }
 
-            else if (parameter == "year") {
+                else if (parameter == "model") {
+                }
 
-            }
-
-            else if (parameter == "make") {
-            }
-
-            else if (parameter == "model") {
-
+                else {
+                    cout << "Not a valid parameter. Possible parameter options are\n"
+                         << "vin, county, city, postalCode, year, make, and model." << endl;
+                }
             }
 
             else {
-                cout << "Not a valid parameter. Possible parameter options are\n"
-                     << "vin, county, city, postalCode, year, make, and model." << endl;
+                cout << "Invalid type. Should be depth or breadth." << endl;
             }
         }
 
