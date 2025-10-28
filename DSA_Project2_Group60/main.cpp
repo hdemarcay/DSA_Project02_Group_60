@@ -191,7 +191,7 @@ int main() {
                 Clock::time_point start = Clock::now();
                 heap.postOrderTraversal();
                 heap.findTime(start);
-                cout << " traverse postorder!" << endl;
+                cout << "traverse postorder!" << endl;
             }
         }
 
@@ -212,6 +212,7 @@ int main() {
                 }
 
                 else if (parameter == "county") {
+
                 }
 
                 else if (parameter == "city") {
