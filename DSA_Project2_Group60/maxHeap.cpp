@@ -310,10 +310,11 @@ void maxHeap::printNode(Node* node, int num) {
 }
 
 //HOLLY ADDING THIS
-void maxHeap::findTime(chrono::steady_clock::time_point before) {
-    chrono::steady_clock::time_point after = chrono::steady_clock::now();
-    chrono::duration<double> funcTime = chrono::duration_cast<chrono::duration<double>>(after - before);
-    cout << "It took " << std::setprecision(3) << funcTime.count() << " seconds to ";
+Duration maxHeap::findTime(Clock::time_point before) {
+    Clock::time_point after = Clock::now();
+    Duration funcTime = chrono::duration_cast<Duration>(after - before);
+    cout << "It took " << setprecision(3) << funcTime.count() << " seconds to ";
+    return funcTime;
 }
 
 // -------------- Traversal Helpers --------------
@@ -429,7 +430,6 @@ void maxHeap::printLevelOrderTraversal() {
 // -------------- DFS Search Helpers --------------
 
 //searches for nodes with matching vin number
-// ADD ERRORS FOR THIS ONE + ye
 void maxHeap::searchVinHelperDFS(Node* node, string& vin, vector<Node*>& matches) {
     if (!node) {
         return;
@@ -516,6 +516,12 @@ void maxHeap::searchModelHelperDFS(Node* node, string& model, vector<Node*>& mat
 // -------------- Accessible DFS Searches --------------
 // Search functions the user "works" with
 
+vector<Node*> maxHeap::searchVinDFS(string vin) {
+    vector<Node*> result;
+    searchVinHelperDFS(root, vin, result);
+    return result;
+}
+
 vector<Node*> maxHeap::searchCountyDFS(string county) {
     vector<Node*> result;
     searchCountyHelperDFS(root, county, result);
@@ -554,9 +560,26 @@ vector<Node*> maxHeap::searchModelDFS(string model) {
 
 // -------------- BFS Search Helpers --------------
 
-// FIGURE THIS SHITE OUT
 void maxHeap::searchVinHelperBFS(Node* node, string& vin, vector<Node*>& matches) {
-
+    // If reached end of heap, return
+    if (node == nullptr) {
+        return;
+    }
+    queue<Node*> q;
+    q.push(node);
+    while (!q.empty()) {
+        Node* curr = q.front();
+        if (curr->vin == vin) {
+            matches.push_back(curr);
+        }
+        if (curr->left != nullptr) {
+            q.push(curr->left);
+        }
+        if (curr->right != nullptr) {
+            q.push(curr->right);
+        }
+        q.pop();
+    }
 }
 
 void maxHeap::searchCountyHelperBFS(Node* node, string& county, vector<Node*>& matches) {
@@ -694,7 +717,11 @@ void maxHeap::searchModelHelperBFS(Node* node, string& model, vector<Node*>& mat
 // -------------- Accessible BFS Searches --------------
 // Search functions the user "works" with
 
-// Figure out VIN stuff
+vector<Node *> maxHeap::searchVinBFS(string vin) {
+    vector<Node*> result;
+    searchVinHelperBFS(root, vin, result);
+    return result;
+}
 
 vector<Node*> maxHeap::searchCountyBFS(string county) {
     vector<Node*> result;

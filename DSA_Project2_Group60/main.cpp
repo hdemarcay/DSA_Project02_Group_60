@@ -12,6 +12,9 @@ using Clock = std::chrono::steady_clock;
 using Duration = std::chrono::duration<double>;
 using namespace std;
 
+//NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
+// Also I still need to add error handling for VINs etc that get entered
+
 // Display startup information, including our team/project information, the
 // introduction and purpose of our project, as well as data credits.
 void displayStartup() {
@@ -68,10 +71,10 @@ void displayInstructions() {
     cout << "3.) Search Commands - can provide a VIN and be returned information\n"
          << "registered under that specific vehicle OR provide a parameter (county,\n"
          << "city, postalCode, year, make, or model) and be returned VINs that\n"
-         << "fall under that parameter. You will specify the type of search you'd\n"
-         << "like and the time it takes to complete will be returned as well." << endl;
-    cout << "\tSearch {type} vin {VIN} (i.e. \"search breadth vin WA1E2AFY8R\")" << endl;
-    cout << "\tSearch {type} {parameter} {value} (i.e. \"search depth city Olympia\")" << endl << endl;
+         << "fall under that parameter. Will perform both types of searches and\n"
+         << "return the time for each for comparison purposes.\n" << endl;
+    cout << "\tSearch vin {VIN} (i.e. \"search vin WA1E2AFY8R\")" << endl;
+    cout << "\tSearch {parameter} {value} (i.e. \"search city Olympia\")" << endl << endl;
 
     cout << "To exit, you can type: done, stop, end, 0, or -1" << endl << endl;
 }
@@ -170,8 +173,8 @@ int main() {
             string type;
             getline(in, type);
 
+            cout << "This might take a few seconds...\n" << endl;
             if (type == "inorder") {
-                cout << "This might take a few seconds..." << endl;
                 Clock::time_point start = Clock::now();
                 heap.inOrderTraversal();
                 heap.findTime(start);
@@ -179,7 +182,6 @@ int main() {
             }
 
             else if (type == "preorder") {
-                cout << "this might take a few seconds..." << endl;
                 Clock::time_point start = Clock::now();
                 heap.preOrderTraversal();
                 heap.findTime(start);
@@ -187,7 +189,6 @@ int main() {
             }
 
             else if (type == "postorder") {
-                cout << "This might take a few seconds..." << endl;
                 Clock::time_point start = Clock::now();
                 heap.postOrderTraversal();
                 heap.findTime(start);
@@ -200,72 +201,220 @@ int main() {
         else if (command == "search") {
 
             // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
-            string type;
-            getline(in, type, ' ');
             string parameter;
             getline(in, parameter, ' ');
+            for (char &c : parameter) {
+                c = tolower(c);
+            }
+
             string value;
             getline(in, value, ' ');
 
-            if (type == "depth") {
-                if (parameter == "vin") {
+            Duration depthTime;
+            Duration breadthTime;
+            bool validParameter = true;
+            cout << "This might take a few seconds...\n" << endl;
+            if (parameter == "vin") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchVinDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchVinBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "That VIN does not exist." << endl;
                 }
-
-                else if (parameter == "county") {
-
-                }
-
-                else if (parameter == "city") {
-                }
-
-                else if (parameter == "postalCode") {
-                }
-
-                else if (parameter == "year") {
-                }
-
-                else if (parameter == "make") {
-                }
-
-                else if (parameter == "model") {
-                }
-
                 else {
-                    cout << "Not a valid parameter. Possible parameter options are\n"
-                         << "vin, county, city, postalCode, year, make, and model." << endl;
+                    Node* node = matchesDFS[0];
+                    cout << "Vin: " << node->vin << endl;
+                    cout << "County: " << node->county << endl;
+                    cout << "City: " << node->city << endl;
+                    cout << "Postal Code: " << node->postalCode << endl;
+                    cout << "Year: " << node->year << endl;
+                    cout << "Make: " << node->make << endl;
+                    cout << "Model: " << node->model << endl;
                 }
             }
 
-            else if (type == "breadth") {
-                if (parameter == "vin") {
-                }
+            else if (parameter == "county") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchCountyDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
 
-                else if (parameter == "county") {
-                }
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchCountyBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
 
-                else if (parameter == "city") {
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs within that county." << endl;
                 }
-
-                else if (parameter == "postalCode") {
-                }
-
-                else if (parameter == "year") {
-                }
-
-                else if (parameter == "make") {
-                }
-
-                else if (parameter == "model") {
-                }
-
                 else {
-                    cout << "Not a valid parameter. Possible parameter options are\n"
-                         << "vin, county, city, postalCode, year, make, and model." << endl;
+                    cout << "VINs within that county:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
+                }
+            }
+
+            else if (parameter == "city") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchCityDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchCityBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs within that city." << endl;
+                }
+                else {
+                    cout << "VINs within that city:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
+                }
+            }
+
+            else if (parameter == "postalCode") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchPostalCodeDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchPostalCodeBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs within that postal code." << endl;
+                }
+                else {
+                    cout << "VINs within that postal code:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
+                }
+            }
+
+            else if (parameter == "year") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchYearDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchYearBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs whose model is from that year." << endl;
+                }
+                else {
+                    cout << "VINs whose model is from that year:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
+                }
+            }
+
+            else if (parameter == "make") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchMakeDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchMakeBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs of that make." << endl;
+                }
+                else {
+                    cout << "VINs of that make:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
+                }
+            }
+
+            else if (parameter == "model") {
+                // Depth first search
+                Clock::time_point start = Clock::now();
+                vector<Node*> matchesDFS = heap.searchModelDFS(value);
+                depthTime = heap.findTime(start);
+                cout << "depth first search!" << endl;
+
+                // Breadth first search
+                start = Clock::now();
+                vector<Node*> matchesBFS = heap.searchModelBFS(value);
+                breadthTime = heap.findTime(start);
+                cout << "breadth first search!" << endl;
+
+                if (matchesDFS.size() == 0) {
+                    cout << "No VINs of that model." << endl;
+                }
+                else {
+                    cout << "VINs of that model:" << endl;
+                    for (int i = 0; i < matchesDFS.size()-1; i++) {
+                        cout << matchesDFS[i]->vin + ", ";
+                    }
+                    cout << matchesDFS[matchesDFS.size()-1]->vin;
+                    cout << endl;
                 }
             }
 
             else {
-                cout << "Invalid type. Should be depth or breadth." << endl;
+                validParameter = false;
+                cout << "Not a valid parameter. Possible parameter options are\n"
+                     << "vin, county, city, postalCode, year, make, and model." << endl;
+            }
+
+            if (validParameter == true) {
+                // Final comparison
+                if (breadthTime > depthTime) {
+                    cout << "Breadth took " << breadthTime - depthTime << " longer than depth!" << endl;
+                }
+                else if (breadthTime < depthTime) {
+                    cout << "Depth took " << depthTime - breadthTime << " longer than breadth!" << endl;
+                }
+                else {
+                    cout << "Depth and breadth took the same amount!" << endl;
+                }
             }
         }
 
