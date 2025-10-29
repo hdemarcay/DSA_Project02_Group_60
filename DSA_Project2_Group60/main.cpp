@@ -200,7 +200,6 @@ int main() {
         // Possible parameter searches are county, city, postal code, year, make, and model
         else if (command == "search") {
 
-            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string parameter;
             getline(in, parameter, ' ');
             for (char &c : parameter) {
@@ -209,6 +208,9 @@ int main() {
 
             string value;
             getline(in, value, ' ');
+            for (char &c : value) {
+                c = tolower(c);
+            }
 
             Duration depthTime;
             Duration breadthTime;
