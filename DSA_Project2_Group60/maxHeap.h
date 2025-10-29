@@ -175,7 +175,7 @@ class maxHeap {
 		vector<Node*> searchTractBFS(string tract);
 
 		// ADD THIS
-		void findTime(Clock::time_point before);
+		Duration findTime(Clock::time_point before, string& timeString);
 };
 
 #endif //MAXHEAP_H

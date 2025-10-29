@@ -323,11 +323,14 @@ void maxHeap::printNode(Node* node, int num) {
 }
 
 //HOLLY ADDING THIS
-Duration maxHeap::findTime(Clock::time_point before) {
+Duration maxHeap::findTime(Clock::time_point before,string &timeString) {
     Clock::time_point after = Clock::now();
     Duration funcTime = chrono::duration_cast<Duration>(after - before);
-    cout << "It took " << setprecision(3) << funcTime.count() << " seconds to ";
+    stringstream time;
+    time<<setprecision(3) << funcTime.count();
+    timeString = "It took " + time.str() + " seconds to "; //BUT WE CAN ADD
     return funcTime;
+
 }
 
 // -------------- Traversal Helpers --------------

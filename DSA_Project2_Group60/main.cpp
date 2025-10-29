@@ -138,28 +138,29 @@ int main() {
             // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
+            string printTime = "";
 
             if (type == "inorder") {
                 // Gets time before function called
                 Clock::time_point start = Clock::now();
                 heap.printInOrderTraversal();
                 // Find the total time
-                heap.findTime(start);
-                cout << "print inorder!" << endl;
+                heap.findTime(start,printTime);
+                cout << printTime<<"print inorder!" << endl;
             }
 
             else if (type == "preorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPreOrderTraversal();
-                heap.findTime(start);
-                cout << "print preorder!" << endl;
+                heap.findTime(start,printTime);
+                cout <<printTime<< "print preorder!" << endl;
             }
 
             else if (type == "postorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPostOrderTraversal();
-                heap.findTime(start);
-                cout << "print postorder!" << endl;
+                heap.findTime(start,printTime);
+                cout <<printTime<< "print postorder!" << endl;
             }
         }
 
@@ -169,27 +170,28 @@ int main() {
             // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
+            string printTraverse;
 
             cout << "This might take a few seconds...\n" << endl;
             if (type == "inorder") {
                 Clock::time_point start = Clock::now();
                 heap.inOrderTraversal();
-                heap.findTime(start);
-                cout << "traverse inorder!" << endl;
+                heap.findTime(start,printTraverse);
+                cout <<printTraverse<< "traverse inorder!" << endl;
             }
 
             else if (type == "preorder") {
                 Clock::time_point start = Clock::now();
                 heap.preOrderTraversal();
-                heap.findTime(start);
-                cout << "traverse preorder!" << endl;
+                heap.findTime(start,printTraverse);
+                cout <<printTraverse<< "traverse preorder!" << endl;
             }
 
             else if (type == "postorder") {
                 Clock::time_point start = Clock::now();
                 heap.postOrderTraversal();
-                heap.findTime(start);
-                cout << "traverse postorder!" << endl;
+                heap.findTime(start,printTraverse);
+                cout <<printTraverse<< "traverse postorder!" << endl;
             }
         }
 
@@ -211,19 +213,21 @@ int main() {
 
             Duration depthTime;
             Duration breadthTime;
+            string depthTimeString="";
+            string breadthTimeString="";
             bool validParameter = true;
             cout << "This might take a few seconds...\n" << endl;
             if (parameter == "vin") {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchVinDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchVinBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -245,13 +249,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchCountyDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchCountyBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -271,13 +275,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchCityDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchCityBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -297,13 +301,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchPostalCodeDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchPostalCodeBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -323,13 +327,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchYearDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchYearBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -349,13 +353,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchMakeDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchMakeBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -375,13 +379,13 @@ int main() {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchModelDFS(value);
-                depthTime = heap.findTime(start);
+                depthTime = heap.findTime(start,depthTimeString);
                 cout << "depth first search!" << endl;
 
                 // Breadth first search
                 start = Clock::now();
                 vector<Node*> matchesBFS = heap.searchModelBFS(value);
-                breadthTime = heap.findTime(start);
+                breadthTime = heap.findTime(start,breadthTimeString);
                 cout << "breadth first search!" << endl;
 
                 if (matchesDFS.size() == 0) {
@@ -405,6 +409,9 @@ int main() {
 
             if (validParameter == true) {
                 // Final comparison
+                cout<<depthTimeString<<"search DSF!" <<endl;
+                cout<<breadthTimeString<<"search BSF!"<<endl;
+
                 if (breadthTime > depthTime) {
                     cout << "Breadth took " << breadthTime - depthTime << " longer than depth!" << endl;
                 }
