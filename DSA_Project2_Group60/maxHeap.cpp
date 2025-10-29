@@ -186,8 +186,8 @@ void maxHeap::loadHeap(string csvFileName) {
 
 //will be used when filtering by 2 or more conditions
 //it will take the vectors from the search functions and take the intersection of them
-vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
-    vector<Node*> result;
+Duration maxHeap::intersection(vector<Node*>& one, vector<Node*>& two, vector<Node*>& result) {
+    Clock::time_point start = Clock::now();
     for (int i = 0; i < one.size(); i++) {
         for (int j = 0; j < two.size(); j++) {
             if (one[i] == two[j]) {
@@ -196,7 +196,10 @@ vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
             }
         }
     }
-    return result;
+    string printTime = "";
+    Duration time = findTime(start, printTime);
+    cout << printTime << "intersection" << endl;
+    return time;
 }
 
 //adds node kinda

@@ -133,8 +133,6 @@ class maxHeap {
     //definitive 'not doing' (I think)
     //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
 
-    vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
-
     public:
 		maxHeap(){}
 		void loadHeap(string csvFileName);
@@ -173,6 +171,8 @@ class maxHeap {
 		vector<Node*> searchMakeBFS(string make);
 		vector<Node*> searchModelBFS(string model);
 		vector<Node*> searchTractBFS(string tract);
+
+		Duration intersection(vector<Node*>& one, vector<Node*>& two, vector<Node*>& result);
 
 		// ADD THIS
 		Duration findTime(Clock::time_point before, string& timeString);

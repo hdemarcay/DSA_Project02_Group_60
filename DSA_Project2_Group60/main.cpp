@@ -12,6 +12,15 @@ using namespace std;
 // NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
 // Also I still need to add error handling for VINs etc that get entered
 
+string getAndLower(istringstream& in) {
+    string value;
+    getline(in, value, ' ');
+    for (char &c : value) {
+        c = tolower(c);
+    }
+    return value;
+}
+
 // Display startup information, including our team/project information, the
 // introduction and purpose of our project, as well as data credits.
 void displayStartup() {
@@ -69,9 +78,13 @@ void displayInstructions() {
          << "registered under that specific vehicle OR provide a parameter (county,\n"
          << "city, postalCode, year, make, or model) and be returned VINs that\n"
          << "fall under that parameter. Will perform both types of searches and\n"
-         << "return the time for each for comparison purposes.\n" << endl;
+         << "return the time for each for comparison purposes." << endl;
     cout << "\tSearch vin {VIN} (i.e. \"search vin WA1E2AFY8R\")" << endl;
     cout << "\tSearch {parameter} {value} (i.e. \"search city Olympia\")" << endl << endl;
+
+    cout << "4.) Intersection - can provide two parameters and will return VINs\n"
+         << "that fall under both categories." << endl;
+    cout << "\tIntersection {parameter1} {value1} {parameter2} {value2} (i.e. \"intersection make model audi a3\")" << endl << endl;
 
     cout << "To exit, you can type: done, stop, end, 0, or -1" << endl << endl;
 }
@@ -108,7 +121,6 @@ int main() {
     string command = "";
     vector<string> exitCommands = {"end", "stop", "done", "-1", "0", " "};
     while (!contains(exitCommands, command)) {
-
         cout << "\nWhat would you like to do? (to show commands type -c or commands)" << endl;
 
         string line;
@@ -224,7 +236,7 @@ int main() {
             bool validParameter = heap.searchVal(parameter, value, searched, depthTime, breadthTime, depthTimeString, breadthTimeString);
 
             if (validParameter == true) {
-                //prints all Vin
+                // Prints all Vins for that parameter
                 heap.printVins(searched);
 
                 // Final comparison
@@ -236,6 +248,56 @@ int main() {
                 }
                 else if (breadthTime < depthTime) {
                     cout << "Depth took " << depthTime.count() - breadthTime.count() << " longer than breadth!" << endl;
+                }
+                else {
+                    cout << "Depth and breadth took the same amount!" << endl;
+                }
+            }
+        }
+
+        else if (command == "intersection") {
+            string parameter = getAndLower(&in);
+            string value = getAndLower(&in);
+            string parameter2 = getAndLower(&in);
+            string value2 = getAndLower(&in);
+
+            cout << "This might take a few seconds...\n" << endl;
+            Duration depthTimeOne;
+            Duration breadthTimeOne;
+            string depthTimeStringOne="";
+            string breadthTimeStringOne="";
+            vector<Node*> searchedOne;
+            searchedOne.clear();
+
+            Duration depthTimeTwo;
+            Duration breadthTimeTwo;
+            string depthTimeStringTwo="";
+            string breadthTimeStringTwo="";
+            vector<Node*> searchedTwo;
+            searchedTwo.clear();
+
+            bool validParameterOne = heap.searchVal(parameter, value, searchedOne, depthTimeOne, breadthTimeOne, depthTimeStringOne, breadthTimeStringOne);
+            if (validParameterOne == false) {
+                break;
+            }
+
+            bool validParameterTwo = heap.searchVal(parameter, value, searchedTwo, depthTimeTwo, breadthTimeTwo, depthTimeStringTwo, breadthTimeStringTwo);
+
+            if (validParameterOne == true &&  validParameterTwo == true) {
+                vector<Node*> intersection;
+                intersection.clear();
+                Duration intersectionTime = heap.intersection(searchedOne, searchedTwo, intersection);
+                heap.printVins(intersection);
+
+                // Final comparison
+                cout << "\nDepth search and intersection took" << (depthTimeOne + depthTimeTwo + intersectionTime).count() << endl;
+                cout << "Breadth search and intersection took" << (breadthTimeOne + breadthTimeTwo + intersectionTime).count() << endl;
+
+                if ((breadthTimeOne + breadthTimeTwo) > (depthTimeOne + depthTimeTwo)) {
+                    cout << "Breadth took " << (breadthTimeOne.count() + breadthTimeTwo.count()) - (depthTimeOne.count() + depthTimeTwo.count()) << " longer than depth!" << endl;
+                }
+                else if ((breadthTimeOne + breadthTimeTwo) < (depthTimeOne + depthTimeTwo)) {
+                    cout << "Depth took " << (depthTimeOne.count() + depthTimeTwo.count()) - (breadthTimeOne.count() + breadthTimeTwo.count()) << " longer than breadth!" << endl;
                 }
                 else {
                     cout << "Depth and breadth took the same amount!" << endl;
