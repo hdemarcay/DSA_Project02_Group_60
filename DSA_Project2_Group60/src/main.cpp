@@ -99,7 +99,7 @@ int main() {
     // Loads the heap and measures the time before and after loading the heap.
     maxHeap heap;
     Clock::time_point beforeLoad = Clock::now();
-    heap.loadHeap("Electric_Vehicle_Population_Data_attempting.csv");
+    heap.loadHeap("../Electric_Vehicle_Population_Data_attempting.csv");
     Clock::time_point afterLoad = Clock::now();
     Duration loadTime = chrono::duration_cast<Duration>(afterLoad - beforeLoad);
     cout << "It took "<< setprecision(3) << loadTime.count() << " seconds to load the data." << endl;
@@ -409,7 +409,7 @@ int main() {
 
             if (validParameter == true) {
                 // Final comparison
-                cout<<depthTimeString<<"search DSF!" <<endl;
+                cout<<"\n"<<depthTimeString<<"search DSF!" <<endl;
                 cout<<breadthTimeString<<"search BSF!"<<endl;
 
                 if (breadthTime > depthTime) {
