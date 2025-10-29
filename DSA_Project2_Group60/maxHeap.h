@@ -120,8 +120,6 @@ class maxHeap {
 	void searchMakeHelperBFS(Node* node, string& make, vector<Node*>& matches);
 	void searchModelHelperBFS(Node* node, string& model, vector<Node*>& matches);
 
-    vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
-
     public:
 		maxHeap(){}
 		void loadHeap(string csvFileName);
