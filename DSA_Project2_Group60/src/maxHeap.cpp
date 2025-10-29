@@ -322,7 +322,7 @@ void maxHeap::printNode(Node* node, int num) {
 
 }
 
-//HOLLY ADDING THIS
+//time
 Duration maxHeap::findTime(Clock::time_point before,string &timeString) {
     Clock::time_point after = Clock::now();
     Duration funcTime = chrono::duration_cast<Duration>(after - before);
