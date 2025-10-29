@@ -7,12 +7,9 @@
 #include <iostream>
 #include <sstream>
 #include "maxHeap.h"
-
-using Clock = std::chrono::steady_clock;
-using Duration = std::chrono::duration<double>;
 using namespace std;
 
-//NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
+// NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
 // Also I still need to add error handling for VINs etc that get entered
 
 // Display startup information, including our team/project information, the

@@ -16,12 +16,6 @@
 // - figure out functions
 // - make sure not case sensitive for commands
 
-void toLower(string &value) {
-    for (char &c : value) {
-        c = tolower(c);
-    }
-}
-
 // -------------- Node/Heap Related --------------
 
 // Performs a swap between all variables in two nodes
@@ -99,81 +93,74 @@ void maxHeap::printNode(Node *node) {
 
 // Loads the Heap values into the max heap from the file
 void maxHeap::loadHeap(string csvFileName) {
-    int count = 0;
+  int count = 0;
 
-    try {
-        ifstream file(csvFileName);
-        string read;
-        if (!file) {
-        throw runtime_error("File failed to open.");
-        }
-
-        while (getline(file, read,',') ) {
-
-            string vin = read;
-            toLower(vin);
-
-            getline(file, read, ',');
-            string county = read;
-            toLower(county);
-
-            getline(file, read, ',');
-            string city = read;
-            toLower(city);
-
-            getline(file, read, ',');
-            string state = read;
-            toLower(state);
-
-            getline(file, read, ',');
-            string postalCode = read;
-            toLower(postalCode);
-
-            getline(file, read, ',');
-            string year = read;
-            toLower(year);
-
-            getline(file, read, ',');
-            string make = read;
-            toLower(make);
-
-            getline(file, read, ',');
-            string model = read;
-            getline(file, read, ',');
-            toLower(model);
-
-            string EV = read;
-            getline(file, read, ',');
-
-            string CAFV = read;
-            getline(file, read, ',');
-
-            string range = read;
-            getline(file, read, ',');
-
-            string MSRP = read;
-            getline(file, read, ',');
-
-            string ld = read;
-            getline(file, read, ',');
-
-            string id = read;
-            getline(file, read, ',');
-
-            string location = read;
-            getline(file, read, ',');
-
-            string EU = read;
-            getline(file, read);
-
-            string tract = read;
-
-            // Update node counter and make nodes
-            count++;
-            insertNode(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
-        }
-        file.close();
+  try {
+    ifstream file(csvFileName);
+    string read;
+    if (!file) {
+      throw runtime_error("File failed to open.");
     }
+
+    while (getline(file, read,',') ) {
+
+      string vin = read;
+      getline(file, read, ',');
+      string county = read;
+      getline(file, read, ',');
+      string city = read;
+      getline(file, read, ',');
+      string state = read;
+      getline(file, read, ',');
+      string postalCode = read;
+      getline(file, read, ',');
+      string year = read;
+      getline(file, read, ',');
+      string make = read;
+      getline(file, read, ',');
+      string model = read;
+      getline(file, read, ',');
+      string EV = read;
+      getline(file, read, ',');
+      string CAFV = read;
+      getline(file, read, ',');
+      string range = read;
+      getline(file, read, ',');
+      string MSRP = read;
+      getline(file, read, ',');
+      string ld = read;
+      getline(file, read, ',');
+      string id = read;
+      getline(file, read, ',');
+      string location = read;
+      getline(file, read, ',');
+      string EU = read;
+      getline(file, read);
+      string tract= read;
+
+
+      /*
+      cout<<"Vin: "<<vin<<endl;
+      cout<<"County: "<<county<<endl;
+      cout<<"City: "<<city<<endl;
+      cout<<"State: "<<state<<endl;
+      cout<<"PostalCode: "<<postalCode<<endl;
+      cout<<"Maker: "<<make<<endl;
+      cout<<"Model: "<<model<<endl;
+      cout<<"Year: "<<year<<endl;
+      cout<<"EV: "<<EV<<endl;
+      cout<<"Range: "<<range<<endl;
+      cout<<"ID: "<<id<<endl;
+      cout<<"Location: "<<location<<endl;
+      cout<<"Tract: "<<tract<<endl;
+      */
+      count++;
+
+      //MAKE NODES AND UPDATE NODE COUNTER :) :D
+      insertNode(vin, county, city, postalCode, year, make, model, range, id, tract,EV,CAFV,MSRP,ld,location,EU);
+    }
+    file.close();
+  }
 
   catch (std::exception& e) {
     std::cerr << "issue here"<<e.what() << std::endl;
