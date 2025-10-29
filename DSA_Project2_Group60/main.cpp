@@ -256,10 +256,10 @@ int main() {
         }
 
         else if (command == "intersection") {
-            string parameter = getAndLower(&in);
-            string value = getAndLower(&in);
-            string parameter2 = getAndLower(&in);
-            string value2 = getAndLower(&in);
+            string parameter = getAndLower(in);
+            string value = getAndLower(in);
+            string parameter2 = getAndLower(in);
+            string value2 = getAndLower(in);
 
             cout << "This might take a few seconds...\n" << endl;
             Duration depthTimeOne;
@@ -290,8 +290,8 @@ int main() {
                 heap.printVins(intersection);
 
                 // Final comparison
-                cout << "\nDepth search and intersection took" << (depthTimeOne + depthTimeTwo + intersectionTime).count() << endl;
-                cout << "Breadth search and intersection took" << (breadthTimeOne + breadthTimeTwo + intersectionTime).count() << endl;
+                cout << "\nDepth searching and intersecting took " << (depthTimeOne + depthTimeTwo + intersectionTime).count() << "seconds" << endl;
+                cout << "Breadth searching and intersecting took " << (breadthTimeOne + breadthTimeTwo + intersectionTime).count() << "seconds" << endl;
 
                 if ((breadthTimeOne + breadthTimeTwo) > (depthTimeOne + depthTimeTwo)) {
                     cout << "Breadth took " << (breadthTimeOne.count() + breadthTimeTwo.count()) - (depthTimeOne.count() + depthTimeTwo.count()) << " longer than depth!" << endl;

@@ -66,22 +66,22 @@ struct Node {
     bool operator==(const Node& other) const {
         // once we decide which we want to use, we can just delete them from here so that it isn't considered when
         // looking for exact matches (unless that's not how it works..)
-        bool vinB = this->vin == other.vin;
-        bool countyB = this->county == other.county;
-        bool cityB = this->city == other.city;
-        bool postalCodeB = this->postalCode == other.postalCode;
-        bool yearB = this->year == other.year;
-        bool makeB = this->make == other.make;
-        bool modelB = this->model == other.model;
-        bool rangeB = this->range == other.range;
-        bool idB = this->id == other.id;
-        bool tractB = this->tract == other.tract;
-        bool EVB = this->EV == other.EV;
-        bool CAFVB = this->CAFV == other.CAFV;
-        bool MSRPB = this->MSRP == other.MSRP;
-        bool ldB = this->ld == other.ld;
-        bool locationB = this->location == other.location;
-        bool EUB = this->EU == other.EU;
+        bool vinB = (this->vin == other.vin);
+        bool countyB = (this->county == other.county);
+        bool cityB = (this->city == other.city);
+        bool postalCodeB = (this->postalCode == other.postalCode);
+        bool yearB = (this->year == other.year);
+        bool makeB = (this->make == other.make);
+        bool modelB = (this->model == other.model);
+        bool rangeB = (this->range == other.range);
+        bool idB = (this->id == other.id);
+        bool tractB = (this->tract == other.tract);
+        bool EVB = (this->EV == other.EV);
+        bool CAFVB = (this->CAFV == other.CAFV);
+        bool MSRPB = (this->MSRP == other.MSRP);
+        bool ldB = (this->ld == other.ld);
+        bool locationB = (this->location == other.location);
+        bool EUB = (this->EU == other.EU);
 
         // If all the attributes are identical, then the nodes are identical :D
         return vinB && countyB && cityB && postalCodeB && yearB && makeB && modelB && rangeB && idB && tractB && EVB && CAFVB && MSRPB && ldB && locationB && EUB;
@@ -176,9 +176,9 @@ class maxHeap {
 
 		// ADD THIS
 		Duration findTime(Clock::time_point before, string& timeString);
-	bool searchVal(Duration& depthTime,Duration& breathTime, string& depthTimeString,string& breathTimeString);
-	void printVins(vector<Node*>& matchesDFS);
-	bool searchVal(string parameter, string value, vector<Node*>& searched, Duration &depthTime, Duration &breadthTime, string &depthTimeString, string &breadthTimeString);
+		bool searchVal(Duration& depthTime,Duration& breathTime, string& depthTimeString,string& breathTimeString);
+		void printVins(vector<Node*>& matchesDFS);
+		bool searchVal(string parameter, string value, vector<Node*>& searched, Duration &depthTime, Duration &breadthTime, string &depthTimeString, string &breadthTimeString);
 };
 
 #endif //MAXHEAP_H
