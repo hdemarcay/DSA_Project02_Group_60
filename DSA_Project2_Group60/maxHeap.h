@@ -117,21 +117,13 @@ class maxHeap {
     void searchMakeHelperDFS(Node* node, string& make, vector<Node*>& matches);
     void searchModelHelperDFS(Node* node, string& model, vector<Node*>& matches);
 
-	void searchVinHelperBFS(Node* node, string& vin, vector<Node*>& matches);
-	void searchCountyHelperBFS(Node* node, string& county, vector<Node*>& matches);
-	void searchCityHelperBFS(Node* node, string& city, vector<Node*>& matches);
-	void searchPostalCodeHelperBFS(Node* node, string& postalCode, vector<Node*>& matches);
-	void searchYearHelperBFS(Node* node, string& year, vector<Node*>& matches);
-	void searchMakeHelperBFS(Node* node, string& make, vector<Node*>& matches);
-	void searchModelHelperBFS(Node* node, string& model, vector<Node*>& matches);
-
-    //sus search functions
-    //questionable if we keep them or not
-    void searchIDHelperDFS(Node* node, string& ID, vector<Node*>& matches);
-    void searchTractHelperDFS(Node* node, string& tract, vector<Node*>& matches);
-
-    //definitive 'not doing' (I think)
-    //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
+	 void searchVinHelperBFS(Node* node, string& vin, vector<Node*>& matches);
+	 void searchCountyHelperBFS(Node* node, string& county, vector<Node*>& matches);
+	 void searchCityHelperBFS(Node* node, string& city, vector<Node*>& matches);
+	 void searchPostalCodeHelperBFS(Node* node, string& postalCode, vector<Node*>& matches);
+	 void searchYearHelperBFS(Node* node, string& year, vector<Node*>& matches);
+	 void searchMakeHelperBFS(Node* node, string& make, vector<Node*>& matches);
+	 void searchModelHelperBFS(Node* node, string& model, vector<Node*>& matches);
 
     vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
 
@@ -150,8 +142,7 @@ class maxHeap {
 		void inOrderTraversal();
 		void postOrderTraversal();
 		void preOrderTraversal();
-
-    void levelOrderTraversal();
+      void levelOrderTraversal();
 
     // Accessible search functions (DFS)
 		vector<Node*> searchVinDFS(string vin);
@@ -161,8 +152,6 @@ class maxHeap {
     	vector<Node*> searchYearDFS(string year);
     	vector<Node*> searchMakeDFS(string make);
     	vector<Node*> searchModelDFS(string model);
-		vector<Node*> searchIdDFS(string id);
-    	vector<Node*> searchTractDFS(string tract);
 
 		// Accessible search functions (BFS)
 		vector<Node*> searchVinBFS(string vin);
@@ -174,7 +163,6 @@ class maxHeap {
 		vector<Node*> searchModelBFS(string model);
 		vector<Node*> searchTractBFS(string tract);
 
-		// ADD THIS
 		Duration findTime(Clock::time_point before, string& timeString);
 };
 

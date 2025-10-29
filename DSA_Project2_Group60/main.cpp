@@ -9,9 +9,6 @@
 #include "maxHeap.h"
 using namespace std;
 
-// NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
-// Also I still need to add error handling for VINs etc that get entered
-
 // Display startup information, including our team/project information, the
 // introduction and purpose of our project, as well as data credits.
 void displayStartup() {
@@ -136,9 +133,11 @@ int main() {
         // -------------- Printing Commands --------------
         if (command == "print") {
 
-            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
+            for (char &c : type) {
+                c = tolower(c);
+            }
             string printTime = "";
 
             if (type == "inorder") {
@@ -147,30 +146,32 @@ int main() {
                 heap.printInOrderTraversal();
                 // Find the total time
                 heap.findTime(start,printTime);
-                cout << printTime<<"print inorder!" << endl;
+                cout << printTime << "print inorder!" << endl;
             }
 
             else if (type == "preorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPreOrderTraversal();
                 heap.findTime(start,printTime);
-                cout <<printTime<< "print preorder!" << endl;
+                cout << printTime << "print preorder!" << endl;
             }
 
             else if (type == "postorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPostOrderTraversal();
                 heap.findTime(start,printTime);
-                cout <<printTime<< "print postorder!" << endl;
+                cout << printTime << "print postorder!" << endl;
             }
         }
 
         // -------------- Traversing Commands --------------
         if (command == "traverse") {
 
-            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
             string type;
             getline(in, type);
+            for (char &c : type) {
+                c = tolower(c);
+            }
             string printTraverse;
 
             cout << "This might take a few seconds...\n" << endl;
@@ -178,7 +179,7 @@ int main() {
                 Clock::time_point start = Clock::now();
                 heap.inOrderTraversal();
                 heap.findTime(start,printTraverse);
-                cout <<printTraverse<< "traverse inorder!" << endl;
+                cout << printTraverse << "traverse inorder!" << endl;
             }
 
             else if (type == "preorder") {
@@ -193,6 +194,13 @@ int main() {
                 heap.postOrderTraversal();
                 heap.findTime(start,printTraverse);
                 cout <<printTraverse<< "traverse postorder!" << endl;
+            }
+
+            else if (type == "levelorder") {
+                Clock::time_point start = Clock::now();
+                heap.levelOrderTraversal();
+                heap.findTime(start,printTraverse);
+                cout <<printTraverse<< "traverse levelorder!" << endl;
             }
         }
 
@@ -263,13 +271,14 @@ int main() {
                     cout << "No VINs within that county." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that county:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -290,13 +299,14 @@ int main() {
                     cout << "No VINs within that city." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that city:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -317,13 +327,14 @@ int main() {
                     cout << "No VINs within that postal code." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that postal code:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -344,13 +355,14 @@ int main() {
                     cout << "No VINs whose model is from that year." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs whose model is from that year:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -371,13 +383,14 @@ int main() {
                     cout << "No VINs of that make." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs of that make:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -398,13 +411,14 @@ int main() {
                     cout << "No VINs of that model." << endl;
                 }
                 else {
-                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs of that model:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
                     }
                     cout << matchesDFS[matchesDFS.size()-1]->vin;
                     cout << endl;
+                    cout << endl;
+                    cout << "Number of matches: " << matchesDFS.size() << endl;
                 }
             }
 
@@ -416,8 +430,8 @@ int main() {
 
             if (validParameter == true) {
                 // Final comparison
-                cout<<"\n"<<depthTimeString<<"search DSF!" <<endl;
-                cout<<breadthTimeString<<"search BSF!"<<endl;
+                cout << "\n"<<depthTimeString << "search DSF!" << endl;
+                cout << breadthTimeString << "search BSF!" << endl;
 
                 if (breadthTime > depthTime) {
                     cout << "Breadth took " << breadthTime.count() - depthTime.count() << " longer than depth!" << endl;
