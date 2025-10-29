@@ -1,3 +1,3 @@
-C:/Users/Kayla Foroughi/CLionProjects/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/DSA_Project2_Group60.dir
-C:/Users/Kayla Foroughi/CLionProjects/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Kayla Foroughi/CLionProjects/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/tiana/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/DSA_Project2_Group60.dir
+C:/Users/tiana/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/tiana/DSA_Project02_Group_60/DSA_Project2_Group60/cmake-build-debug/CMakeFiles/rebuild_cache.dir
