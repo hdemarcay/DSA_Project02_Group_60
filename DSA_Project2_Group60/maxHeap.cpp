@@ -15,6 +15,7 @@
 // - menu screen
 // - figure out functions
 // - make sure not case sensitive for commands
+//- check v in search
 
 void toLower(string &value) {
     for (char &c : value) {
@@ -331,6 +332,148 @@ Duration maxHeap::findTime(Clock::time_point before,string &timeString) {
     timeString = "It took " + time.str() + " seconds to "; //BUT WE CAN ADD
     return funcTime;
 
+}
+
+void maxHeap::printVins(vector<Node*>& matchesDFS) {
+    if (matchesDFS.size() == 0) {
+        cout << "No VINs within that county." << endl;
+    }
+    else {
+        cout << "number of matches: " << matchesDFS.size() << endl;
+        cout << "VINs within that county:" << endl;
+        for (int i = 0; i < matchesDFS.size()-1; i++) {
+            cout << matchesDFS[i]->vin + ", ";
+        }
+        cout << matchesDFS[matchesDFS.size()-1]->vin;
+        cout << endl;
+    }
+}
+
+bool maxHeap::searchVal(string parameter, string value, vector<Node*>& searched, Duration &depthTime, Duration &breadthTime, string &depthTimeString, string &breadthTimeString) {
+    bool validParameter = true;
+    if (parameter == "vin") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchVinDFS(value);
+        depthTime = findTime(start,depthTimeString);
+        cout << "depth first search!" << endl;
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchVinBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+        cout << "breadth first search!" << endl;
+
+        if (matchesDFS.size() == 0) {
+            cout << "That VIN does not exist." << endl;
+        }
+        else {
+            Node* node = matchesDFS[0];
+            printNode(node);
+        }
+        return true;
+    }
+
+    else if (parameter == "county") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchCountyDFS(value);
+        depthTime = findTime(start,depthTimeString);
+        //cout << "depth first search!" << endl;
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchCountyBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+        //cout << "breadth first search!" << endl;
+    }
+
+    else if (parameter == "city") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchCityDFS(value);
+        depthTime = findTime(start,depthTimeString);
+        //cout << "depth first search!" << endl;
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchCityBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+        //cout << "breadth first search!" << endl;
+    }
+
+    else if (parameter == "postalcode") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchPostalCodeDFS(value);
+        depthTime = findTime(start,depthTimeString);
+        //cout << "depth first search!" << endl;
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchPostalCodeBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+        //cout << "breadth first search!" << endl;
+    }
+
+    else if (parameter == "year") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchYearDFS(value);
+        depthTime = findTime(start,depthTimeString);
+        //cout << "depth first search!" << endl;
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchYearBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+    }
+
+    else if (parameter == "make") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchMakeDFS(value);
+        depthTime = findTime(start,depthTimeString);
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchMakeBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+    }
+
+    else if (parameter == "model") {
+        // Depth first search
+        Clock::time_point start = Clock::now();
+        vector<Node*> matchesDFS = searchModelDFS(value);
+        depthTime = findTime(start,depthTimeString);
+
+        searched = matchesDFS;
+
+        // Breadth first search
+        start = Clock::now();
+        vector<Node*> matchesBFS = searchModelBFS(value);
+        breadthTime = findTime(start,breadthTimeString);
+    }
+
+    else {
+        cout << "Not a valid parameter. Possible parameter options are\n"
+             << "vin, county, city, postalcode, year, make, and model." << endl;
+        return false;
+    }
+
+    return true;
 }
 
 // -------------- Traversal Helpers --------------

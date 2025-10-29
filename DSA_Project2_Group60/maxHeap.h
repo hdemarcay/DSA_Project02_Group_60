@@ -176,6 +176,9 @@ class maxHeap {
 
 		// ADD THIS
 		Duration findTime(Clock::time_point before, string& timeString);
+	bool searchVal(Duration& depthTime,Duration& breathTime, string& depthTimeString,string& breathTimeString);
+	void printVins(vector<Node*>& matchesDFS);
+	bool searchVal(string parameter, string value, vector<Node*>& searched, Duration &depthTime, Duration &breadthTime, string &depthTimeString, string &breadthTimeString);
 };
 
 #endif //MAXHEAP_H
