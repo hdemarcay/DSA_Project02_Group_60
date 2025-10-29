@@ -552,25 +552,25 @@ vector<Node*> maxHeap::searchCityDFS(string city) {
 
 vector<Node*> maxHeap::searchPostalCodeDFS(string postalCode) {
     vector<Node*> result;
-    searchCityHelperDFS(root, postalCode, result);
+    searchPostalCodeHelperDFS(root, postalCode, result);
     return result;
 }
 
 vector<Node*> maxHeap::searchYearDFS(string year) {
     vector<Node*> result;
-    searchCityHelperDFS(root, year, result);
+    searchYearHelperDFS(root, year, result);
     return result;
 }
 
 vector<Node*> maxHeap::searchMakeDFS(string make) {
     vector<Node*> result;
-    searchCityHelperDFS(root, make, result);
+    searchMakeHelperDFS(root, make, result);
     return result;
 }
 
 vector<Node*> maxHeap::searchModelDFS(string model) {
     vector<Node*> result;
-    searchCityHelperDFS(root, model, result);
+    searchModelHelperDFS(root, model, result);
     return result;
 }
 
