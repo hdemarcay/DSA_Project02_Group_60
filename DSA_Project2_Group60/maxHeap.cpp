@@ -8,13 +8,9 @@
 #include <queue>
 
 //TODO:
-// - add comments better
-// - add function to start reading from terminal like how many commands
-// - pick what a terminal commands are
-// - ******order level traversals
-// - menu screen
-// - figure out functions
-// - make sure not case sensitive for commands
+// - new combo filters
+// - city and make
+// - city and
 
 void toLower(string &value) {
     for (char &c : value) {
@@ -177,14 +173,13 @@ void maxHeap::loadHeap(string csvFileName) {
 
   catch (std::exception& e) {
     std::cerr << "issue here"<<e.what() << std::endl;
-    //cout<<"ISEEEUEEUEU************"<<endl;
   }
-  cout<<"All the data has been loaded into the Max Heap.\nThere is a total of "<<count<<" nodes in the heap."<<endl;
+  cout << "All the data has been loaded into the Max Heap.\nThere is a total of " << count << " nodes in the heap." << endl;
 
 }
 
-//will be used when filtering by 2 or more conditions
-//it will take the vectors from the search functions and take the intersection of them
+// Will be used when filtering by 2 or more conditions
+// It will take the vectors from the search functions and take the intersection of them
 vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
     vector<Node*> result;
     for (int i = 0; i < one.size(); i++) {
@@ -198,22 +193,18 @@ vector<Node*> maxHeap::intersection(vector<Node*>& one, vector<Node*>& two) {
     return result;
 }
 
-//adds node kinda
+// Adds node kinda
 void maxHeap::insertNode(string vin, string county, string city, string postalCode, string year, string make, string model, string range, string id, string tract,string EV, string CAFV, string MSRP, string ld, string location, string EU) {
-  //make first node
+  // Make first node
   if (heapSize == 0){
     root = new Node(vin, county, city, postalCode, year, make, model, range, id, tract, EV, CAFV, MSRP, ld, location, EU);
     heapSize++;
     return;
   }
 
-  //if not first element make stack to find path of adding then follow path to add element
+  //If not first element make stack to find path of adding then follow path to add element
   stack<int> path;
   int parentElement = (heapSize - 1) / 2;
-  //print statments for de-bugging
-  //cout<<heapSize<<"==>";
-  //cout<<parentElement<<"\n";
-  // 0 = left   and 1 = right
   while(parentElement != 0){
     if (parentElement % 2 == 0){
       path.push(1);
@@ -247,76 +238,70 @@ void maxHeap::insertNode(string vin, string county, string city, string postalCo
     parentsInPath.push_back(parent->left);
   }
 
-  //now some switches time
-  //then do the heapify up thing!!!!
-  //like go up that path again but flip stuff :)
-
-  //****currently sorted by vin ******
+  // Currently sorted by vin
   Node* current = parentsInPath[parentsInPath.size()-1];
   for(int i = parentsInPath.size() - 2; i >= 0; i--) {
     Node* parent = parentsInPath[i];
-    //no need to swap
+    // No need to swap
     if (parent->vin > current->vin){
-              break;
+    break;
     }
-    //swap time !!!!! swaps values like in deletion of BST with 2 children
+    //  Swap time! Swaps values like in deletion of BST with 2 children
     swapValues(current, parent);
   }
   heapSize++;
 }
 
-// FIGURE THIS METHOD OUT????????
 // Will print only the characteristics you want based on input number.
 void maxHeap::printNode(Node* node, int num) {
     cout<<endl;
     // Will have number in the 10th spot if you want vin
-    if (num/1000000000 != 0) {
+    if (num / 1000000000 != 0) {
         cout << "Vin: " << node->vin;
     }
     num = num % 1000000000;
     // Will have number in the 9th spot if you want county
-    if (num/100000000 != 0) {
+    if (num / 100000000 != 0) {
         cout << "\tCounty: " << node->county;
     }
     num = num % 100000000;
     // Will have number in the 8th spot if you want city
-    if (num/10000000 != 0) {
+    if (num / 10000000 != 0) {
         cout << "\t\tCity: " << node->city;
     }
     num = num % 10000000;
-
-    //will have number in the 7th spot if u want postalCode
-    if (num/1000000!=0) {
+    // Will have number in the 7th spot if u want postalCode
+    if (num / 1000000 != 0) {
         cout << "\t\tPostal Code: " << node->postalCode;
     }
-    num = num%1000000;
-    ////will have number in the 6th spot if u want year
-    if (num/100000!=0) {
+    num = num % 1000000;
+    // Will have number in the 6th spot if u want year
+    if (num / 100000 != 0) {
         cout << "\tYear: " << node->year;
     }
-    //will have number in the 5th spot if u want make
-    num = num%100000;
-    if (num/10000!=0) {
+    // Will have number in the 5th spot if u want make
+    num = num % 100000;
+    if (num / 10000 != 0) {
         cout << "\n\t\tMake: " << node->make;
     }
-    num = num%10000;
-    //will have number in the 4th spot if u want model
-    if (num/1000!=0) {
+    num = num % 10000;
+    // Will have number in the 4th spot if u want model
+    if (num / 1000 != 0) {
         cout << "\t\tModel: " << node->model;
     }
-    num = num%1000;
-    //will have number in the 3rd spot if u want range
-    if (num/100!=0) {
+    num = num % 1000;
+    // Will have number in the 3rd spot if u want range
+    if (num / 100 != 0) {
         cout << "\tRange: " << node->range;
     }
-    num = num%100;
-    //will have number in the 2nd spot if u want id
-    if (num/10!=0) {
+    num = num % 100;
+    // Will have number in the 2nd spot if u want id
+    if (num / 10 != 0) {
         cout << "\tID: " << node->id;
     }
-    num = num%10;
-    //will have number in the 1rst spot if u want tract
-    if (num!=0) {
+    num = num % 10;
+    // Will have number in the 1rst spot if u want tract
+    if (num != 0) {
         cout << "\tTract: " << node->tract;
     }
 
@@ -327,8 +312,8 @@ Duration maxHeap::findTime(Clock::time_point before,string &timeString) {
     Clock::time_point after = Clock::now();
     Duration funcTime = chrono::duration_cast<Duration>(after - before);
     stringstream time;
-    time<<setprecision(3) << funcTime.count();
-    timeString = "It took " + time.str() + " seconds to "; //BUT WE CAN ADD
+    time << setprecision(3) << funcTime.count();
+    timeString = "It took " + time.str() + " seconds to ";
     return funcTime;
 
 }
@@ -445,7 +430,7 @@ void maxHeap::printLevelOrderTraversal() {
 
 // -------------- DFS Search Helpers --------------
 
-//searches for nodes with matching vin number
+// Searches for nodes with matching vin number
 void maxHeap::searchVinHelperDFS(Node* node, string& vin, vector<Node*>& matches) {
     if (!node) {
         return;
