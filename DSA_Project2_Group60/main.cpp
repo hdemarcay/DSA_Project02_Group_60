@@ -263,6 +263,7 @@ int main() {
                     cout << "No VINs within that county." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that county:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -289,6 +290,7 @@ int main() {
                     cout << "No VINs within that city." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that city:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -298,7 +300,7 @@ int main() {
                 }
             }
 
-            else if (parameter == "postalCode") {
+            else if (parameter == "postalcode") {
                 // Depth first search
                 Clock::time_point start = Clock::now();
                 vector<Node*> matchesDFS = heap.searchPostalCodeDFS(value);
@@ -315,6 +317,7 @@ int main() {
                     cout << "No VINs within that postal code." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs within that postal code:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -341,6 +344,7 @@ int main() {
                     cout << "No VINs whose model is from that year." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs whose model is from that year:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -367,6 +371,7 @@ int main() {
                     cout << "No VINs of that make." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs of that make:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -393,6 +398,7 @@ int main() {
                     cout << "No VINs of that model." << endl;
                 }
                 else {
+                    cout << "number of matches: " << matchesDFS.size() << endl;
                     cout << "VINs of that model:" << endl;
                     for (int i = 0; i < matchesDFS.size()-1; i++) {
                         cout << matchesDFS[i]->vin + ", ";
@@ -405,7 +411,7 @@ int main() {
             else {
                 validParameter = false;
                 cout << "Not a valid parameter. Possible parameter options are\n"
-                     << "vin, county, city, postalCode, year, make, and model." << endl;
+                     << "vin, county, city, postalcode, year, make, and model." << endl;
             }
 
             if (validParameter == true) {
@@ -414,10 +420,10 @@ int main() {
                 cout<<breadthTimeString<<"search BSF!"<<endl;
 
                 if (breadthTime > depthTime) {
-                    cout << "Breadth took " << breadthTime - depthTime << " longer than depth!" << endl;
+                    cout << "Breadth took " << breadthTime.count() - depthTime.count() << " longer than depth!" << endl;
                 }
                 else if (breadthTime < depthTime) {
-                    cout << "Depth took " << depthTime - breadthTime << " longer than breadth!" << endl;
+                    cout << "Depth took " << depthTime.count() - breadthTime.count() << " longer than breadth!" << endl;
                 }
                 else {
                     cout << "Depth and breadth took the same amount!" << endl;
