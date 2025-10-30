@@ -150,21 +150,21 @@ int main() {
                 heap.printInOrderTraversal();
                 // Find the total time
                 heap.findTime(start,printTime);
-                cout << printTime<<"print inorder!" << endl;
+                cout << printTime << "print inorder!" << endl;
             }
 
             else if (type == "preorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPreOrderTraversal();
                 heap.findTime(start,printTime);
-                cout <<printTime<< "print preorder!" << endl;
+                cout << printTime << "print preorder!" << endl;
             }
 
             else if (type == "postorder") {
                 Clock::time_point start = Clock::now();
                 heap.printPostOrderTraversal();
                 heap.findTime(start,printTime);
-                cout <<printTime<< "print postorder!" << endl;
+                cout << printTime << "print postorder!" << endl;
             }
         }
 
@@ -179,7 +179,7 @@ int main() {
                 Clock::time_point start = Clock::now();
                 heap.inOrderTraversal();
                 heap.findTime(start,printTraverse);
-                cout <<printTraverse<< "traverse inorder!" << endl;
+                cout << printTraverse << "traverse inorder!" << endl;
             }
 
             else if (type == "preorder") {
@@ -194,6 +194,13 @@ int main() {
                 heap.postOrderTraversal();
                 heap.findTime(start,printTraverse);
                 cout <<printTraverse<< "traverse postorder!" << endl;
+            }
+
+            else if (type == "levelorder") {
+                Clock::time_point start = Clock::now();
+                heap.levelOrderTraversal();
+                heap.findTime(start,printTraverse);
+                cout <<printTraverse<< "traverse levelorder!" << endl;
             }
         }
 

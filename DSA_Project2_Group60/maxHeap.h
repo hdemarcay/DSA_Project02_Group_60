@@ -22,7 +22,8 @@ struct Node {
 	Node* left;
 	Node* right;
 
-    string vin; // Unique vehicle number
+	// Used in search algorithms
+    string vin; // Unique vehicle number - used as main identifier/what heap is based upon
     string county; // County car is in
     string city; // City car is in
     string postalCode; // Postal code car is registered in
@@ -30,6 +31,8 @@ struct Node {
     string make; // Car make
     string model; // Car model
     string range; // Electric range
+
+	// Extra vehicle information
     string id; // Vehicle ID
     string tract; // 2020 Census Tract
     string EV; // Electric Vehicle Type
@@ -64,24 +67,23 @@ struct Node {
 
     // Overloaded == operator; Defines the equality operator for our Node class.
     bool operator==(const Node& other) const {
-        // once we decide which we want to use, we can just delete them from here so that it isn't considered when
-        // looking for exact matches (unless that's not how it works..)
-        bool vinB = (this->vin == other.vin);
-        bool countyB = (this->county == other.county);
-        bool cityB = (this->city == other.city);
-        bool postalCodeB = (this->postalCode == other.postalCode);
-        bool yearB = (this->year == other.year);
-        bool makeB = (this->make == other.make);
-        bool modelB = (this->model == other.model);
-        bool rangeB = (this->range == other.range);
-        bool idB = (this->id == other.id);
-        bool tractB = (this->tract == other.tract);
-        bool EVB = (this->EV == other.EV);
-        bool CAFVB = (this->CAFV == other.CAFV);
-        bool MSRPB = (this->MSRP == other.MSRP);
-        bool ldB = (this->ld == other.ld);
-        bool locationB = (this->location == other.location);
-        bool EUB = (this->EU == other.EU);
+
+        bool vinB = this->vin == other.vin;
+        bool countyB = this->county == other.county;
+        bool cityB = this->city == other.city;
+        bool postalCodeB = this->postalCode == other.postalCode;
+        bool yearB = this->year == other.year;
+        bool makeB = this->make == other.make;
+        bool modelB = this->model == other.model;
+        bool rangeB = this->range == other.range;
+        bool idB = this->id == other.id;
+        bool tractB = this->tract == other.tract;
+        bool EVB = this->EV == other.EV;
+        bool CAFVB = this->CAFV == other.CAFV;
+        bool MSRPB = this->MSRP == other.MSRP;
+        bool ldB = this->ld == other.ld;
+        bool locationB = this->location == other.location;
+        bool EUB = this->EU == other.EU;
 
         // If all the attributes are identical, then the nodes are identical :D
         return vinB && countyB && cityB && postalCodeB && yearB && makeB && modelB && rangeB && idB && tractB && EVB && CAFVB && MSRPB && ldB && locationB && EUB;
@@ -92,27 +94,20 @@ class maxHeap {
     int heapSize = 0;
     Node* root = nullptr;
 
-	 void swapValues(Node* current, Node* parent);
-	 void printNode(Node* node);
-	 void printNode(Node* node,int Num);
+	void swapValues(Node* current, Node* parent);
+	void printNode(Node* node);
+	void printNode(Node* node,int Num);
+	vector<Node*> intersection(vector<Node*>& one, vector<Node*>& two);
 
     void inOrderTraversalHelper(Node* node, bool print);
     void postOrderTraversalHelper(Node* node, bool print);
     void preOrderTraversalHelper(Node* node, bool print);
-	 void levelOrderTraversalHelper(Node* node, bool print);
+	void levelOrderTraversalHelper(Node* node, bool print);
 
-    //search functions
-    //Q: how specific do we want to go?
-    //should I just make them for each characteristic of the noade and write a function that takes the intersection?
-    //because writing all the different combinations may suck
-    //**they will all return vectors :D
-
-    //ADD STD::CLOCK
-
-	 void searchVinHelperDFS(Node* node, string& vin, vector<Node*>& matches);
+	void searchVinHelperDFS(Node* node, string& vin, vector<Node*>& matches);
     void searchCountyHelperDFS(Node* node, string& county, vector<Node*>& matches);
     void searchCityHelperDFS(Node* node, string& city, vector<Node*>& matches);
-	 void searchPostalCodeHelperDFS(Node* node, string& postalCode, vector<Node*>& matches);
+	void searchPostalCodeHelperDFS(Node* node, string& postalCode, vector<Node*>& matches);
     void searchYearHelperDFS(Node* node, string& year, vector<Node*>& matches);
     void searchMakeHelperDFS(Node* node, string& make, vector<Node*>& matches);
     void searchModelHelperDFS(Node* node, string& model, vector<Node*>& matches);
@@ -125,14 +120,6 @@ class maxHeap {
 	void searchMakeHelperBFS(Node* node, string& make, vector<Node*>& matches);
 	void searchModelHelperBFS(Node* node, string& model, vector<Node*>& matches);
 
-    //sus search functions
-    //questionable if we keep them or not
-    void searchIDHelperDFS(Node* node, string& ID, vector<Node*>& matches);
-    void searchTractHelperDFS(Node* node, string& tract, vector<Node*>& matches);
-
-    //definitive 'not doing' (I think)
-    //state, EV type, CAFV eligibility, electric range, MSRP, legislative district, location?, electric utility
-
     public:
 		maxHeap(){}
 		void loadHeap(string csvFileName);
@@ -140,18 +127,17 @@ class maxHeap {
 
 		// Accessible printing functions
 		void printInOrderTraversal();
-      void printLevelOrderTraversal();
-      void printPostOrderTraversal();
+		void printPostOrderTraversal();
 		void printPreOrderTraversal();
+		void printLevelOrderTraversal();
 
 		// Accessible traversal functions
 		void inOrderTraversal();
 		void postOrderTraversal();
 		void preOrderTraversal();
+		void levelOrderTraversal();
 
-    void levelOrderTraversal();
-
-    // Accessible search functions (DFS)
+    	// Accessible search functions (DFS)
 		vector<Node*> searchVinDFS(string vin);
     	vector<Node*> searchCountyDFS(string county);
     	vector<Node*> searchCityDFS(string city);
@@ -159,8 +145,6 @@ class maxHeap {
     	vector<Node*> searchYearDFS(string year);
     	vector<Node*> searchMakeDFS(string make);
     	vector<Node*> searchModelDFS(string model);
-		vector<Node*> searchIdDFS(string id);
-    	vector<Node*> searchTractDFS(string tract);
 
 		// Accessible search functions (BFS)
 		vector<Node*> searchVinBFS(string vin);
@@ -170,11 +154,9 @@ class maxHeap {
 		vector<Node*> searchYearBFS(string year);
 		vector<Node*> searchMakeBFS(string make);
 		vector<Node*> searchModelBFS(string model);
-		vector<Node*> searchTractBFS(string tract);
 
 		Duration intersection(vector<Node*>& one, vector<Node*>& two, vector<Node*>& result);
 
-		// ADD THIS
 		Duration findTime(Clock::time_point before, string& timeString);
 		bool searchVal(Duration& depthTime,Duration& breathTime, string& depthTimeString,string& breathTimeString);
 		void printVins(vector<Node*>& matchesDFS);
