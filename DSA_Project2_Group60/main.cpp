@@ -9,9 +9,6 @@
 #include "maxHeap.h"
 using namespace std;
 
-// NOTE: maybe we should print the time afterwards bc printing after printing time makes time get lost (I can add this later)
-// Also I still need to add error handling for VINs etc that get entered
-
 string getAndLower(istringstream& in) {
     string value;
     getline(in, value, ' ');
@@ -60,30 +57,26 @@ void displayInstructions() {
     cout << "Possible Commands: (You can use \"-c\" to see all the commands. " << endl;
     cout << "Note: 1.) Please do not add extra spaces after commands, 2.) Commands aren't case sensitive.\n" << endl;
 
-    cout << "1.) Print Commands - traverse and print the entire dataset and\n"
-        << "return the entire time it takes." << endl;
+    cout << "1.) Print Commands - traverse and print the entire dataset  return the entire time it takes." << endl;
     cout << "\tPrint Inorder (\"print inorder\")" << endl;
     cout << "\tPrint Preorder (\"print preorder\")" << endl;
     cout << "\tPrint Postorder (\"print postorder\")" << endl;
     cout << "\tPrint Level Order (\"print levelorder\")" << endl << endl;
 
-    cout << "2.) Traversing Commands - traverse through the entire dataset and\n"
-         << "return the entire time it takes." << endl;
+    cout << "2.) Traversing Commands - traverse through the entire dataset and return the entire time it takes." << endl;
     cout << "\tTraverse Inorder (\"traverse inorder\")" << endl;
     cout << "\tTraverse Preorder (\"traverse preorder\")" << endl;
     cout << "\tTraverse Postorder (\"traverse postorder\")" << endl;
     cout << "\tTraverse Level Order (\"traverse levelorder\")" << endl << endl;
 
-    cout << "3.) Search Commands - can provide a VIN and be returned information\n"
-         << "registered under that specific vehicle OR provide a parameter (county,\n"
-         << "city, postalCode, year, make, or model) and be returned VINs that\n"
-         << "fall under that parameter. Will perform both types of searches and\n"
-         << "return the time for each for comparison purposes." << endl;
+    cout << "3.) Search Commands - can provide a VIN and be returned information registered under that specific\n"
+         << "vehicle OR provide a parameter (county, city, postalCode, year, make, or model) and be returned VINS\n"
+         << "that fall under that parameter. Will perform both types of searches and return the time for each for\n"
+         << "comparison purposes." << endl;
     cout << "\tSearch vin {VIN} (i.e. \"search vin WA1E2AFY8R\")" << endl;
     cout << "\tSearch {parameter} {value} (i.e. \"search city Olympia\")" << endl << endl;
 
-    cout << "4.) Intersection - can provide two parameters and will return VINs\n"
-         << "that fall under both categories." << endl;
+    cout << "4.) Intersection - can provide two parameters and will return VINs that fall under both categories." << endl;
     cout << "\tIntersection {parameter1} {value1} {parameter2} {value2} (i.e. \"intersection make model audi a3\")" << endl << endl;
 
     cout << "To exit, you can type: done, stop, end, 0, or -1" << endl << endl;
@@ -148,9 +141,7 @@ int main() {
         // -------------- Printing Commands --------------
         if (command == "print") {
 
-            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
-            string type;
-            getline(in, type);
+            string type = getAndLower(in);
             string printTime = "";
 
             if (type == "inorder") {
@@ -180,9 +171,7 @@ int main() {
         // -------------- Traversing Commands --------------
         if (command == "traverse") {
 
-            // POSSIBLE ISSUE -> MIGHT NEED TO TOLOWER THESE
-            string type;
-            getline(in, type);
+            string type = getAndLower(in);
             string printTraverse;
 
             cout << "This might take a few seconds...\n" << endl;
@@ -212,17 +201,8 @@ int main() {
         // Possible parameter searches are county, city, postal code, year, make, and model
         else if (command == "search") {
 
-            string parameter;
-            getline(in, parameter, ' ');
-            for (char &c : parameter) {
-                c = tolower(c);
-            }
-
-            string value;
-            getline(in, value, ' ');
-            for (char &c : value) {
-                c = tolower(c);
-            }
+            string parameter = getAndLower(in);
+            string value = getAndLower(in);
 
             Duration depthTime;
             Duration breadthTime;
@@ -240,8 +220,8 @@ int main() {
                 heap.printVins(searched);
 
                 // Final comparison
-                cout<<"\n"<<depthTimeString<<"search DSF!" <<endl;
-                cout<<breadthTimeString<<"search BSF!"<<endl;
+                cout << "\n" << depthTimeString << "to search with depth!" << endl;
+                cout << breadthTimeString << "to search with breadth!" << endl;
 
                 if (breadthTime > depthTime) {
                     cout << "Breadth took " << breadthTime.count() - depthTime.count() << " longer than depth!" << endl;
@@ -290,8 +270,8 @@ int main() {
                 heap.printVins(intersection);
 
                 // Final comparison
-                cout << "\nDepth searching and intersecting took " << (depthTimeOne + depthTimeTwo + intersectionTime).count() << "seconds" << endl;
-                cout << "Breadth searching and intersecting took " << (breadthTimeOne + breadthTimeTwo + intersectionTime).count() << "seconds" << endl;
+                cout << "\nDepth searching and intersecting took " << (depthTimeOne + depthTimeTwo + intersectionTime).count() << " seconds" << endl;
+                cout << "Breadth searching and intersecting took " << (breadthTimeOne + breadthTimeTwo + intersectionTime).count() << " seconds" << endl;
 
                 if ((breadthTimeOne + breadthTimeTwo) > (depthTimeOne + depthTimeTwo)) {
                     cout << "Breadth took " << (breadthTimeOne.count() + breadthTimeTwo.count()) - (depthTimeOne.count() + depthTimeTwo.count()) << " longer than depth!" << endl;
