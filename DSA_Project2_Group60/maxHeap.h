@@ -155,7 +155,12 @@ class maxHeap {
 		vector<Node*> searchMakeBFS(string make);
 		vector<Node*> searchModelBFS(string model);
 
+		Duration intersection(vector<Node*>& one, vector<Node*>& two, vector<Node*>& result);
+
 		Duration findTime(Clock::time_point before, string& timeString);
+		bool searchVal(Duration& depthTime,Duration& breathTime, string& depthTimeString,string& breathTimeString);
+		void printVins(vector<Node*>& matchesDFS);
+		bool searchVal(string parameter, string value, vector<Node*>& searched, Duration &depthTime, Duration &breadthTime, string &depthTimeString, string &breadthTimeString);
 };
 
 #endif //MAXHEAP_H
