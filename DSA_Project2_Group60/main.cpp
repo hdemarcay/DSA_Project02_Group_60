@@ -135,7 +135,7 @@ int main() {
 
         // If an exit command is provided, continue to exit the loop
         if (contains(exitCommands, command)) {
-            continue;
+            break;
         }
 
         // -------------- Printing Commands --------------

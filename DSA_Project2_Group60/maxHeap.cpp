@@ -7,12 +7,6 @@
 #include <iomanip>
 #include <queue>
 
-//TODO:
-// - new combo filters
-// - city and make
-// - city and
-// -check v in search
-
 void toLower(string &value) {
     for (char &c : value) {
         c = tolower(c);
@@ -311,7 +305,7 @@ void maxHeap::printNode(Node* node, int num) {
 
 }
 
-//time
+// Time
 Duration maxHeap::findTime(Clock::time_point before,string &timeString) {
     Clock::time_point after = Clock::now();
     Duration funcTime = chrono::duration_cast<Duration>(after - before);
